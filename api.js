@@ -259,7 +259,7 @@ function cancelClass(data) {
 
     return apiRequest(
 
-        "/cancelled-classes",
+        "/cancelled-classes/add",
 
         "POST",
 

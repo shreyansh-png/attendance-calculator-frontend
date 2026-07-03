@@ -151,7 +151,7 @@ if (registerForm) {
 
                 section,
 
-                academicYear: Number(academicYear)
+                batch: Number(academicYear)
 
             });
 
