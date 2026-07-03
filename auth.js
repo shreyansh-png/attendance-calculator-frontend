@@ -1,79 +1,79 @@
-const BASE_URL = "http://localhost:5000/api/v1";
+// auth.js - handles login and registration using api.js functions
+
+// ===========================
+// Login Form
+// ===========================
+
 const loginForm = document.getElementById("login-form");
 
-loginForm.addEventListener("submit", async function (e) {
+if (loginForm) {
 
-    e.preventDefault();
-
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-
-    if (!email || !password) {
-
-        alert("Please fill all fields.");
-
-        return;
-
+    // If already logged in, redirect to dashboard
+    if (localStorage.getItem("accessToken")) {
+        window.location.href = "dashboard.html";
     }
 
-    try {
+    loginForm.addEventListener("submit", async function (e) {
 
-        const response = await fetch(`${BASE_URL}/users/login`, {
+        e.preventDefault();
 
-            method: "POST",
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
 
-            headers: {
-                "Content-Type": "application/json"
-            },
+        if (!email || !password) {
 
-            body: JSON.stringify({
-                email,
-                password
-            })
-
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-
-            alert(data.message);
+            alert("Please fill all fields.");
 
             return;
 
         }
 
-        // Save Token
-        localStorage.setItem(
-            "accessToken",
-            data.data.accessToken
-        );
+        try {
 
-        // Save User
-        localStorage.setItem(
-            "user",
-            JSON.stringify(data.data.user)
-        );
+            const data = await loginUser(email, password);
 
-        alert("Login Successful!");
+            // Save Token
+            localStorage.setItem(
+                "accessToken",
+                data.data.accessToken
+            );
 
-        window.location.href = "dashboard.html";
+            // Save User
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.data.user)
+            );
 
-    }
+            alert("Login Successful!");
 
-    catch (error) {
+            window.location.href = "dashboard.html";
 
-        alert("Server Error");
+        }
 
-        console.log(error);
+        catch (error) {
 
-    }
+            alert(error.message || "Server Error. Please try again.");
 
-});
+            console.log(error);
+
+        }
+
+    });
+
+}
+
+// ===========================
+// Register Form
+// ===========================
 
 const registerForm = document.getElementById("register-form");
 
 if (registerForm) {
+
+    // If already logged in, redirect to dashboard
+    if (localStorage.getItem("accessToken")) {
+        window.location.href = "dashboard.html";
+    }
 
     registerForm.addEventListener("submit", async function (e) {
 
@@ -81,9 +81,10 @@ if (registerForm) {
 
         const fullName = document.getElementById("fullName").value.trim();
 
-       const rollNumber = document.getElementById("rollNo").value.trim();
+        const rollNumber = document.getElementById("rollNo").value.trim();
 
-const academicYear = document.getElementById("batch").value;
+        const academicYear = document.getElementById("batch").value;
+
         const email = document.getElementById("email").value.trim();
 
         const branch = document.getElementById("branch").value;
@@ -92,7 +93,6 @@ const academicYear = document.getElementById("batch").value;
 
         const section = document.getElementById("section").value;
 
-       
         const password = document.getElementById("password").value;
 
         const confirmPassword = document.getElementById("confirmPassword").value;
@@ -135,49 +135,27 @@ const academicYear = document.getElementById("batch").value;
 
         try {
 
-            const response = await fetch(`${BASE_URL}/users/register`, {
+            await registerUser({
 
-                method: "POST",
+                fullName,
 
-                headers: {
+                rollNumber,
 
-                    "Content-Type": "application/json"
+                email,
 
-                },
+                password,
 
-                body: JSON.stringify({
+                semester: Number(semester),
 
-                    fullName,
+                branch,
 
-                    rollNumber,
+                section,
 
-                    email,
-
-                    password,
-
-                    semester:Number(semester),
-
-                    branch,
-
-                    section,
-
-                    academicYear
-
-                })
+                academicYear: Number(academicYear)
 
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-
-                alert(data.message);
-
-                return;
-
-            }
-
-            alert("Registration Successful");
+            alert("Registration Successful! Please login.");
 
             window.location.href = "login.html";
 
@@ -185,7 +163,7 @@ const academicYear = document.getElementById("batch").value;
 
         catch (error) {
 
-            alert("Server Error");
+            alert(error.message || "Server Error. Please try again.");
 
             console.log(error);
 

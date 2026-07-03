@@ -1,19 +1,38 @@
+// changepassword.js - Change password page
+
+// Auth guard
+const token = localStorage.getItem("accessToken");
+
+if (!token) {
+
+    window.location.href = "login.html";
+
+}
+
 const form = document.getElementById("passwordForm");
 
-form.addEventListener("submit", async function(e){
+form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
     const verificationCode =
-    document.getElementById("verificationCode").value.trim();
+        document.getElementById("verificationCode").value.trim();
 
     const newPassword =
-    document.getElementById("newPassword").value;
+        document.getElementById("newPassword").value;
 
     const confirmPassword =
-    document.getElementById("confirmPassword").value;
+        document.getElementById("confirmPassword").value;
 
-    if(newPassword !== confirmPassword){
+    if (!verificationCode) {
+
+        alert("Please enter the verification code.");
+
+        return;
+
+    }
+
+    if (newPassword !== confirmPassword) {
 
         alert("Passwords do not match");
 
@@ -21,7 +40,15 @@ form.addEventListener("submit", async function(e){
 
     }
 
-    try{
+    if (newPassword.length < 6) {
+
+        alert("Password must be at least 6 characters.");
+
+        return;
+
+    }
+
+    try {
 
         await changePassword({
 
@@ -33,13 +60,13 @@ form.addEventListener("submit", async function(e){
 
         alert("Password Changed Successfully");
 
-        window.location.href="profile.html";
+        window.location.href = "profile.html";
 
     }
 
-    catch(error){
+    catch (error) {
 
-        alert(error.message);
+        alert(error.message || "Could not change password.");
 
     }
 

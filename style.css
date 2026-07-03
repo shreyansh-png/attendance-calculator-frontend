@@ -321,4 +321,91 @@ footer{
 
 }
 
+/* ================= SHARED NAVBAR ================= */
+
+.navbar{
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 40px;
+
+}
+
+.navbar h2{
+
+    color:white;
+
+    margin:0;
+
+}
+
+.navbar button{
+
+    background:white;
+
+    color:#2563eb;
+
+    border:2px solid white;
+
+    padding:10px 22px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.navbar button:hover{
+
+    background:#1d4ed8;
+
+    color:white;
+
+    border-color:#1d4ed8;
+
+}
+
+/* ================= INPUT STYLES ================= */
+
+input,select,textarea{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    font-family:inherit;
+
+}
+
+input:focus,select:focus,textarea:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.1);
+
+}
 

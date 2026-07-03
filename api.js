@@ -1,4 +1,4 @@
-const BASE_URL = "https://attendease-backend-p5ah.onrender.com/api/v1";
+const BASE_URL = "https://attendance-calculator-backend-2.onrender.com/api/v1";
 
 // ===========================
 // Generic Request Function
@@ -6,7 +6,7 @@ const BASE_URL = "https://attendease-backend-p5ah.onrender.com/api/v1";
 
 async function apiRequest(endpoint, method = "GET", body = null) {
 
-    const token = localStorage.getItem("accessToken");
+    const token = localStorage.getItem("accessToken") || localStorage.getItem("adminToken");
 
     const options = {
 
@@ -30,37 +30,43 @@ async function apiRequest(endpoint, method = "GET", body = null) {
 
     }
 
-   const response = await fetch(`${BASE_URL}${endpoint}`, options);
+    const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
-   // Auto logout if token expires
-if (response.status === 401) {
+    // Auto logout if token expires
+    if (response.status === 401) {
 
-    localStorage.clear();
+        localStorage.clear();
 
-    alert("Session expired. Please login again.");
+        alert("Session expired. Please login again.");
 
-    window.location.href = "login.html";
+        // Redirect to the correct login page based on context
+        if (window.location.pathname.includes("/admin/")) {
+            window.location.href = "admin-login.html";
+        } else {
+            window.location.href = "../login.html";
+        }
 
-    return;
+        return;
+
+    }
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Something went wrong");
+    }
+
+    return data;
 
 }
 
-const data = await response.json();
 
-if (!response.ok) {
-    throw new Error(data.message || "Something went wrong");
-}
-
-return data;
-
-}
-
-
-//AUthentication
+// Authentication
 
 function loginUser(email, password) {
     return apiRequest("/users/login", "POST", { email, password });
 }
+
 function registerUser(userData) {
 
     return apiRequest("/users/register", "POST", userData);
@@ -73,7 +79,7 @@ function logoutUser() {
 
 }
 
-//Profile
+// Profile
 
 function getProfile() {
     return apiRequest("/users/profile", "GET");
@@ -83,13 +89,14 @@ function updateProfile(userData) {
     return apiRequest("/users/profile", "PATCH", userData);
 }
 
-//attendance
+// Attendance
 
 function markAttendance(classId) {
     return apiRequest("/attendance/mark", "POST", {
         classId
     });
 }
+
 function getAttendanceReport() {
 
     return apiRequest("/attendance/report");
@@ -108,21 +115,21 @@ function getAttendanceHistory() {
 
 }
 
-//timetable
+// Timetable
 function getTodayTimetable() {
 
-    return apiRequest("/timetable/today");
+    return apiRequest("/timetables/today");
 
 }
 
 function getMyTimetable() {
 
-    return apiRequest("/timetable/my");
+    return apiRequest("/timetables/my");
 
 }
 
 
-async function changePassword(data){
+async function changePassword(data) {
 
     return await apiRequest(
 
@@ -161,7 +168,7 @@ async function adminLogin(adminId, password) {
 // Holiday APIs
 // ===========================
 
-function addHoliday(data){
+function addHoliday(data) {
 
     return apiRequest(
 
@@ -175,7 +182,7 @@ function addHoliday(data){
 
 }
 
-function getHolidays(){
+function getHolidays() {
 
     return apiRequest(
 
@@ -185,7 +192,7 @@ function getHolidays(){
 
 }
 
-function deleteHoliday(id){
+function deleteHoliday(id) {
 
     return apiRequest(
 
@@ -202,11 +209,11 @@ function deleteHoliday(id){
 // Extra Class APIs
 // ===========================
 
-function addExtraClass(data){
+function addExtraClass(data) {
 
     return apiRequest(
 
-        "/extra-class/add",
+        "/extra-classes/add",
 
         "POST",
 
@@ -216,21 +223,21 @@ function addExtraClass(data){
 
 }
 
-function getExtraClasses(){
+function getExtraClasses() {
 
     return apiRequest(
 
-        "/extra-class"
+        "/extra-classes"
 
     );
 
 }
 
-function deleteExtraClass(id){
+function deleteExtraClass(id) {
 
     return apiRequest(
 
-        `/extra-class/${id}`,
+        `/extra-classes/${id}`,
 
         "DELETE"
 
@@ -242,17 +249,17 @@ function deleteExtraClass(id){
 // Subjects
 // ==========================
 
-function getSubjects(){
+function getSubjects() {
 
     return apiRequest("/subjects");
 
 }
 
-function cancelClass(data){
+function cancelClass(data) {
 
     return apiRequest(
 
-        "/cancel-class",
+        "/cancelled-classes",
 
         "POST",
 
@@ -262,24 +269,34 @@ function cancelClass(data){
 
 }
 
-function getCancelledClasses(){
+function getCancelledClasses() {
 
     return apiRequest(
 
-        "/cancel-class"
+        "/cancelled-classes"
 
     );
 
 }
 
-function deleteCancelledClass(id){
+function deleteCancelledClass(id) {
 
     return apiRequest(
 
-        `/cancel-class/${id}`,
+        `/cancelled-classes/${id}`,
 
         "DELETE"
 
     );
+
+}
+
+// ==========================
+// Dashboard
+// ==========================
+
+function getDashboard() {
+
+    return apiRequest("/dashboard");
 
 }
