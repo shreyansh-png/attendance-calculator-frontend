@@ -1,29 +1,41 @@
+// timetable.js - Weekly timetable page
+
+// Auth guard
 const token = localStorage.getItem("accessToken");
 
-if(!token){
+if (!token) {
 
-    window.location.href="login.html";
+    window.location.href = "login.html";
 
 }
 
-async function loadTimetable(){
+async function loadTimetable() {
 
-    try{
+    try {
 
-        const timetable =
-        await getMyTimetable();
+        const response = await getMyTimetable();
 
-        const schedule =
-        timetable.data.schedule;
+        // Handle both { data: { schedule: {...} } } and { schedule: {...} }
+        const timetableData = response.data || response;
 
-        const container =
-        document.getElementById("timetableContainer");
+        const schedule = timetableData.schedule || timetableData;
 
-        container.innerHTML="";
+        const container = document.getElementById("timetableContainer");
 
-        for(const day in schedule){
+        container.innerHTML = "";
 
-            let html=`
+        const days = Object.keys(schedule);
+
+        if (days.length === 0) {
+            container.innerHTML = `<p>No timetable found. Please contact your administrator.</p>`;
+            return;
+        }
+
+        for (const day in schedule) {
+
+            const classes = schedule[day];
+
+            let html = `
 
             <div class="day-card">
 
@@ -35,63 +47,73 @@ async function loadTimetable(){
 
             `;
 
-            schedule[day].forEach(cls=>{
+            if (!classes || classes.length === 0) {
+                html += `<p>No classes</p>`;
+            } else {
 
-                html+=`
+                classes.forEach(cls => {
 
-                <div class="class-card">
+                    const subjectName = cls.subjectId
+                        ? (typeof cls.subjectId === "object" ? cls.subjectId.subjectName : cls.subjectId)
+                        : "Unknown Subject";
 
-                <h3>
+                    html += `
 
-                ${cls.subjectId.subjectName}
+                    <div class="class-card">
 
-                </h3>
+                    <h3>
 
-                <p>
+                    ${subjectName}
 
-                ${cls.startTime}
-                -
-                ${cls.endTime}
+                    </h3>
 
-                </p>
+                    <p>
 
-                <p>
+                    ${cls.startTime}
+                    -
+                    ${cls.endTime}
 
-                Room :
-                ${cls.room}
+                    </p>
 
-                </p>
+                    <p>
 
-                <p>
+                    Room :
+                    ${cls.room}
 
-                Teacher :
-                ${cls.teacher}
+                    </p>
 
-                </p>
+                    <p>
 
-                <p>
+                    Teacher :
+                    ${cls.teacher || "N/A"}
 
-                ${cls.classType}
+                    </p>
 
-                </p>
+                    <p>
 
-                </div>
+                    ${cls.classType || ""}
 
-                `;
+                    </p>
 
-            });
+                    </div>
 
-            html+=`</div>`;
+                    `;
 
-            container.innerHTML+=html;
+                });
+
+            }
+
+            html += `</div>`;
+
+            container.innerHTML += html;
 
         }
 
     }
 
-    catch(error){
+    catch (error) {
 
-        alert(error.message);
+        alert(error.message || "Could not load timetable.");
 
     }
 

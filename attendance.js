@@ -1,28 +1,40 @@
+// attendance.js - Attendance report page
+
+// Auth guard
 const token = localStorage.getItem("accessToken");
 
-if(!token){
+if (!token) {
 
-    window.location.href="login.html";
+    window.location.href = "login.html";
 
 }
 
-async function loadAttendance(){
+async function loadAttendance() {
 
-    try{
+    try {
 
         const report = await getAttendanceReport();
 
+        // Handle both { overallAttendance, subjects } and { data: { overallAttendance, subjects } }
+        const data = report.data || report;
+
         document.getElementById("overallAttendance").innerText =
-            report.overallAttendance + "%";
+            data.overallAttendance + "%";
 
-        const table =
-        document.getElementById("attendanceTable");
+        const table = document.getElementById("attendanceTable");
 
-        table.innerHTML="";
+        table.innerHTML = "";
 
-        report.subjects.forEach(subject=>{
+        const subjects = data.subjects || [];
 
-            table.innerHTML+=`
+        if (subjects.length === 0) {
+            table.innerHTML = `<tr><td colspan="5">No attendance data found.</td></tr>`;
+            return;
+        }
+
+        subjects.forEach(subject => {
+
+            table.innerHTML += `
 
             <tr>
 
@@ -44,9 +56,9 @@ async function loadAttendance(){
 
     }
 
-    catch(error){
+    catch (error) {
 
-        alert(error.message);
+        alert(error.message || "Could not load attendance report.");
 
     }
 

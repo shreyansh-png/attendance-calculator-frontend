@@ -1,95 +1,147 @@
+// holiday.js - Holiday management
 
+// Auth guard
 const adminToken = localStorage.getItem("adminToken");
 
-if(!adminToken){
+if (!adminToken) {
 
-    window.location.href="admin-login.html";
+    window.location.href = "admin-login.html";
 
 }
 
-const form=document.getElementById("holidayForm");
+const form = document.getElementById("holidayForm");
 
-form.addEventListener("submit",async(e)=>{
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const title=document.getElementById("title").value.trim();
+    const title = document.getElementById("title").value.trim();
 
-    const date=document.getElementById("date").value;
+    const date = document.getElementById("date").value;
 
-    const description=document.getElementById("description").value.trim();
+    const description = document.getElementById("description").value.trim();
 
-    const response=await addHoliday({
+    if (!title || !date) {
+        alert("Please fill in the holiday title and date.");
+        return;
+    }
 
-        title,
+    try {
 
-        date,
+        const response = await addHoliday({
 
-        description
+            title,
 
-    });
+            date,
 
-    alert(response.data.message);
+            description
 
-    form.reset();
+        });
 
-    loadHolidays();
+        const msg = (response.data && response.data.message) ||
+                    response.message ||
+                    "Holiday added successfully!";
+
+        alert(msg);
+
+        form.reset();
+
+        loadHolidays();
+
+    }
+
+    catch (error) {
+
+        alert(error.message || "Could not add holiday.");
+
+    }
 
 });
 
-async function loadHolidays(){
+async function loadHolidays() {
 
-    const response=await getHolidays();
+    const container = document.getElementById("holidayList");
 
-    const container=document.getElementById("holidayList");
+    container.innerHTML = "Loading...";
 
-    container.innerHTML="";
+    try {
 
-    response.data.forEach(holiday=>{
+        const response = await getHolidays();
 
-        container.innerHTML+=`
+        // Handle both { data: [...] } and direct array
+        const holidays = Array.isArray(response) ? response :
+            (Array.isArray(response.data) ? response.data : []);
 
-        <div class="holiday-card">
+        container.innerHTML = "";
 
-        <h3>
+        if (holidays.length === 0) {
+            container.innerHTML = "<p>No holidays found.</p>";
+            return;
+        }
 
-        ${holiday.title}
+        holidays.forEach(holiday => {
 
-        </h3>
+            container.innerHTML += `
 
-        <p>
+            <div class="holiday-card">
 
-        ${holiday.date.substring(0,10)}
+            <h3>
 
-        </p>
+            ${holiday.title}
 
-        <p>
+            </h3>
 
-        ${holiday.description||""}
+            <p>
 
-        </p>
+            ${holiday.date ? holiday.date.substring(0, 10) : ""}
 
-        <button onclick="removeHoliday('${holiday._id}')">
+            </p>
 
-        Delete
+            <p>
 
-        </button>
+            ${holiday.description || ""}
 
-        </div>
+            </p>
 
-        `;
+            <button onclick="removeHoliday('${holiday._id}')">
 
-    });
+            Delete
+
+            </button>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        container.innerHTML = `<p>Error: ${error.message}</p>`;
+
+    }
 
 }
 
-async function removeHoliday(id){
+async function removeHoliday(id) {
 
-    if(!confirm("Delete this holiday?")) return;
+    if (!confirm("Delete this holiday?")) return;
 
-    await deleteHoliday(id);
+    try {
 
-    loadHolidays();
+        await deleteHoliday(id);
+
+        loadHolidays();
+
+    }
+
+    catch (error) {
+
+        alert(error.message || "Could not delete holiday.");
+
+    }
 
 }
 

@@ -1,5 +1,6 @@
+// upload-timetable.js - Upload timetable
 
-
+// Auth guard
 const adminToken = localStorage.getItem("adminToken");
 
 if (!adminToken) {
@@ -7,6 +8,8 @@ if (!adminToken) {
     window.location.href = "admin-login.html";
 
 }
+
+const BASE_URL_UPLOAD = "https://attendance-calculator-backend-2.onrender.com/api/v1";
 
 document.getElementById("uploadForm")
 
@@ -18,7 +21,7 @@ document.getElementById("uploadForm")
 
     if (!file) {
 
-        alert("Select an Excel file");
+        alert("Please select an Excel file");
 
         return;
 
@@ -28,11 +31,15 @@ document.getElementById("uploadForm")
 
     formData.append("timetable", file);
 
+    const messageEl = document.getElementById("message");
+
+    messageEl.innerText = "Uploading...";
+
     try {
 
         const response = await fetch(
 
-            "http://localhost:5000/api/v1/timetable/upload",
+            `${BASE_URL_UPLOAD}/timetables/upload`,
 
             {
 
@@ -54,15 +61,21 @@ document.getElementById("uploadForm")
 
         const data = await response.json();
 
-        document.getElementById("message")
+        if (!response.ok) {
 
-        .innerText = data.message;
+            messageEl.innerText = "Error: " + (data.message || "Upload failed");
+
+        } else {
+
+            messageEl.innerText = data.message || "Timetable uploaded successfully!";
+
+        }
 
     }
 
     catch (error) {
 
-        alert(error.message);
+        messageEl.innerText = "Error: " + error.message;
 
     }
 

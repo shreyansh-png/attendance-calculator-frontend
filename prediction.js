@@ -1,47 +1,58 @@
+// prediction.js - Attendance prediction page
+
+// Auth guard
 const token = localStorage.getItem("accessToken");
 
-if(!token){
+if (!token) {
 
-    window.location.href="login.html";
+    window.location.href = "login.html";
 
 }
 
-async function loadPrediction(){
+async function loadPrediction() {
 
-    try{
+    try {
 
         const prediction = await getAttendancePrediction();
 
-        const container =
-        document.getElementById("predictionContainer");
+        const container = document.getElementById("predictionContainer");
 
-        container.innerHTML="";
+        container.innerHTML = "";
 
-        prediction.data.forEach(subject=>{
+        // Handle both { data: [...] } and direct array
+        const subjects = Array.isArray(prediction) ? prediction :
+            (Array.isArray(prediction.data) ? prediction.data : []);
 
-            let message="";
+        if (subjects.length === 0) {
+            container.innerHTML = `<p>No prediction data available. Please check your attendance records.</p>`;
+            return;
+        }
 
-            let className="";
+        subjects.forEach(subject => {
 
-            if(subject.attendance>=75){
+            let message = "";
 
-                className="good";
+            let className = "";
 
-                message=
-                `✅ You can miss ${subject.canMiss} classes`;
+            if (subject.attendance >= 75) {
+
+                className = "good";
+
+                message =
+                    `✅ You can miss ${subject.canMiss} more classes`;
 
             }
 
-            else{
+            else {
 
-                className="bad";
+                className = "bad";
 
-                message=
-                `❌ Attend next ${subject.needToAttend} classes`;
+                message =
+                    `❌ Attend next ${subject.needToAttend} classes to reach 75%`;
 
             }
 
-            container.innerHTML+=`
+            container.innerHTML += `
 
             <div class="prediction-card">
 
@@ -68,9 +79,9 @@ async function loadPrediction(){
 
     }
 
-    catch(error){
+    catch (error) {
 
-        alert(error.message);
+        alert(error.message || "Could not load prediction data.");
 
     }
 

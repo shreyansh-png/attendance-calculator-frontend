@@ -1,3 +1,6 @@
+// extra-class.js - Extra class management
+
+// Auth guard
 const adminToken = localStorage.getItem("adminToken");
 
 if (!adminToken) {
@@ -6,154 +9,200 @@ if (!adminToken) {
 
 }
 
-async function loadSubjects(){
+async function loadSubjects() {
 
-    const response = await getSubjects();
+    try {
 
-    const select =
+        const response = await getSubjects();
 
-    document.getElementById("subjectId");
+        const select = document.getElementById("subjectId");
 
-    select.innerHTML =
+        select.innerHTML =
+            `<option value="">Select Subject</option>`;
 
-    `<option value="">Select Subject</option>`;
+        // Handle both { data: [...] } and direct array
+        const subjects = Array.isArray(response) ? response :
+            (Array.isArray(response.data) ? response.data : []);
 
-    response.data.forEach(subject=>{
+        subjects.forEach(subject => {
 
-        select.innerHTML += `
+            select.innerHTML += `
 
-        <option value="${subject._id}">
+            <option value="${subject._id}">
 
-        ${subject.subjectCode}
+            ${subject.subjectCode}
 
-        -
+            -
 
-        ${subject.subjectName}
+            ${subject.subjectName}
 
-        </option>
+            </option>
 
-        `;
+            `;
 
-    });
+        });
+
+    }
+
+    catch (error) {
+
+        console.log("Could not load subjects:", error.message);
+
+    }
 
 }
 
 loadSubjects();
 
-const form=
-document.getElementById("extraClassForm");
+const form = document.getElementById("extraClassForm");
 
-form.addEventListener("submit",async(e)=>{
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const response=await addExtraClass({
+    try {
 
-        batch:
-        document.getElementById("batch").value,
+        const response = await addExtraClass({
 
-        branch:
-        document.getElementById("branch").value,
+            batch: Number(document.getElementById("batch").value),
 
-        semester:
-        document.getElementById("semester").value,
+            branch: document.getElementById("branch").value,
 
-        section:
-        document.getElementById("section").value,
+            semester: Number(document.getElementById("semester").value),
 
-        subjectId:
-        document.getElementById("subjectId").value,
+            section: document.getElementById("section").value,
 
-        teacher:
-        document.getElementById("teacher").value,
+            subjectId: document.getElementById("subjectId").value,
 
-        room:
-        document.getElementById("room").value,
+            teacher: document.getElementById("teacher").value,
 
-        date:
-        document.getElementById("date").value,
+            room: document.getElementById("room").value,
 
-        startTime:
-        document.getElementById("startTime").value,
+            date: document.getElementById("date").value,
 
-        endTime:
-        document.getElementById("endTime").value,
+            startTime: document.getElementById("startTime").value,
 
-        classType:
-        document.getElementById("classType").value
+            endTime: document.getElementById("endTime").value,
 
-    });
+            classType: document.getElementById("classType").value
 
-    alert(response.data.message);
+        });
 
-    form.reset();
+        const msg = (response.data && response.data.message) ||
+                    response.message ||
+                    "Extra class added successfully!";
 
-    loadExtraClasses();
+        alert(msg);
+
+        form.reset();
+
+        loadSubjects();
+
+        loadExtraClasses();
+
+    }
+
+    catch (error) {
+
+        alert(error.message || "Could not add extra class.");
+
+    }
 
 });
 
-async function loadExtraClasses(){
+async function loadExtraClasses() {
 
-    const response=
-    await getExtraClasses();
+    const container = document.getElementById("extraClassList");
 
-    const container=
-    document.getElementById("extraClassList");
+    container.innerHTML = "Loading...";
 
-    container.innerHTML="";
+    try {
 
-    response.data.forEach(extra=>{
+        const response = await getExtraClasses();
 
-        container.innerHTML+=`
+        // Handle both { data: [...] } and direct array
+        const extraClasses = Array.isArray(response) ? response :
+            (Array.isArray(response.data) ? response.data : []);
 
-        <div class="holiday-card">
+        container.innerHTML = "";
 
-        <h3>
+        if (extraClasses.length === 0) {
+            container.innerHTML = "<p>No extra classes found.</p>";
+            return;
+        }
 
-        ${extra.subjectId.subjectName}
+        extraClasses.forEach(extra => {
 
-        </h3>
+            const subjectName = extra.subjectId
+                ? (typeof extra.subjectId === "object" ? extra.subjectId.subjectName : extra.subjectId)
+                : "Unknown Subject";
 
-        <p>
+            container.innerHTML += `
 
-        ${extra.date.substring(0,10)}
+            <div class="holiday-card">
 
-        </p>
+            <h3>
 
-        <p>
+            ${subjectName}
 
-        ${extra.startTime}
+            </h3>
 
-        -
+            <p>
 
-        ${extra.endTime}
+            ${extra.date ? extra.date.substring(0, 10) : ""}
 
-        </p>
+            </p>
 
-        <button
-        onclick="removeExtraClass('${extra._id}')">
+            <p>
 
-        Delete
+            ${extra.startTime}
 
-        </button>
+            -
 
-        </div>
+            ${extra.endTime}
 
-        `;
+            </p>
 
-    });
+            <button
+            onclick="removeExtraClass('${extra._id}')">
+
+            Delete
+
+            </button>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
+    catch (error) {
+
+        container.innerHTML = `<p>Error: ${error.message}</p>`;
+
+    }
 
 }
 
-async function removeExtraClass(id){
+async function removeExtraClass(id) {
 
-    if(!confirm("Delete Extra Class?"))
+    if (!confirm("Delete Extra Class?")) return;
 
-    return;
+    try {
 
-    await deleteExtraClass(id);
+        await deleteExtraClass(id);
 
-    loadExtraClasses();
+        loadExtraClasses();
+
+    }
+
+    catch (error) {
+
+        alert(error.message || "Could not delete extra class.");
+
+    }
 
 }
 
