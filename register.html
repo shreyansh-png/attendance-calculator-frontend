@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | AttendEase</title>
+
+    <link rel="stylesheet" href="style.css">
+
+   
+</head>
+
+<body>
+
+<div class="login-container">
+
+<div class="login-card">
+
+<h1 class="logo">AttendEase</h1>
+
+<h2>Create Account</h2>
+
+<p>Create your student account.</p>
+
+<form id="register-form">
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="fullName"
+placeholder="Enter your full name"
+required>
+
+<label>Roll Number</label>
+
+<input
+type="text"
+id="rollNo"
+placeholder="Enter Roll Number"
+required>
+
+<label>Email</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email"
+required>
+
+<label>Branch</label>
+
+<select id="branch" required>
+
+<option value="">Select Branch</option>
+
+<option value="ECE">ECE</option>
+
+<option value="CSE-R">CSE-R</option>
+
+<option value="CSE-AI">CSE-AI</option>
+
+<option value="CSE-SF">CSE-SF</option>
+
+<option value="CHE">CHE</option>
+
+<option value="EE">EE</option>
+
+<option value="ME">ME</option>
+
+<option value="CE">CE</option>
+
+</select>
+
+<label>Semester</label>
+
+<select id="semester" required>
+
+<option value="">Select Semester</option>
+
+<option value="1">1</option>
+
+<option value="2">2</option>
+
+<option value="3">3</option>
+
+<option value="4">4</option>
+
+<option value="5">5</option>
+
+<option value="6">6</option>
+
+<option value="7">7</option>
+
+<option value="8">8</option>
+
+</select>
+
+<label>Section</label>
+
+<select id="section" required>
+
+<option value="">Select Section</option>
+
+<option value="A">A</option>
+
+<option value="B">B</option>
+
+</select>
+
+<label>Batch (Passing Year)</label>
+
+<input
+type="number"
+id="batch"
+placeholder="Example: 2029"
+required>
+
+<label>Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Create Password"
+required>
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+<button type="submit">
+
+Create Account
+
+</button>
+
+</form>
+
+<div class="bottom-text">
+
+<p>Already have an account?</p>
+
+<a href="login.html">
+
+Login
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="api.js"></script>
+<script src="auth.js"></script>
+
+</body>
+
+</html>

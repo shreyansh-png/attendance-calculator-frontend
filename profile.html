@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | AttendEase</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="profile.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2>AttendEase</h2>
+
+    <button onclick="window.location='dashboard.html'">
+
+        Dashboard
+
+    </button>
+
+</nav>
+
+<main class="profile-page">
+
+<div class="profile-card">
+
+<h1>
+
+My Profile
+
+</h1>
+
+<div class="profile-row">
+
+<label>Full Name</label>
+
+<p id="fullName">Loading...</p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Email</label>
+
+<p id="email"></p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Roll Number</label>
+
+<p id="rollNumber"></p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Branch</label>
+
+<p id="branch"></p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Semester</label>
+
+<p id="semester"></p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Section</label>
+
+<p id="section"></p>
+
+</div>
+
+<div class="profile-row">
+
+<label>Passing Year</label>
+
+<p id="academicYear"></p>
+
+</div>
+
+<div class="buttons">
+
+<button id="editBtn">
+
+Edit Profile
+
+</button>
+
+<button
+id="saveBtn"
+style="display:none;">
+
+Save Changes
+
+</button>
+
+<button id="changePasswordBtn">
+
+Change Password
+
+</button>
+
+</div>
+
+</div>
+
+</main>
+
+<script src="api.js"></script>
+
+<script src="profile.js"></script>
+
+</body>
+
+</html>

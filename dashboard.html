@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | AttendEase</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="dashboard.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <h2>AttendEase</h2>
+
+        <button id="logoutBtn">Logout</button>
+
+    </nav>
+
+    <!-- Main -->
+
+    <main class="dashboard">
+
+        <!-- Greeting -->
+
+        <section class="welcome-card">
+
+            <h1 id="greeting">
+
+                Good Morning 👋
+
+            </h1>
+
+            <p id="studentName">
+
+                Loading...
+
+            </p>
+
+        </section>
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <h3>Overall Attendance</h3>
+
+                <h1 id="overallAttendance">
+
+                    --
+
+                </h1>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>Today's Classes</h3>
+
+                <h1 id="todayClassCount">
+
+                    --
+
+                </h1>
+
+            </div>
+
+        </section>
+
+        <!-- Today's Classes -->
+
+        <section>
+
+            <h2>
+
+                Today's Schedule
+
+            </h2>
+
+            <div id="todayClasses">
+
+            </div>
+
+        </section>
+
+        <!-- Quick Actions -->
+
+        <section class="actions">
+
+            <button id="attendanceBtn">
+
+                Attendance
+
+            </button>
+
+            <button id="predictionBtn">
+
+                Prediction
+
+            </button>
+
+            <button id="timetableBtn">
+
+                Timetable
+
+            </button>
+
+            <button id="profileBtn">
+
+                Profile
+
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="api.js"></script>
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>

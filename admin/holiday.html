@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Holiday Management</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <h2>Holiday Management</h2>
+
+    <button onclick="window.location='admin-dashboard.html'">
+
+        Dashboard
+
+    </button>
+
+</nav>
+
+<main class="dashboard">
+
+<div class="login-card">
+
+<h2>
+
+Add Holiday
+
+</h2>
+
+<form id="holidayForm">
+
+<label for="title">
+
+Holiday Title
+
+</label>
+
+<input
+type="text"
+id="title"
+required>
+
+<label for="date">
+
+Holiday Date
+
+</label>
+
+<input
+type="date"
+id="date"
+required>
+
+<label for="description">
+
+Description
+
+</label>
+
+<textarea
+id="description"
+rows="4">
+</textarea>
+
+<button type="submit">
+
+Add Holiday
+
+</button>
+
+</form>
+
+</div>
+
+<br>
+
+<div class="login-card">
+
+<h2>
+
+Holiday List
+
+</h2>
+
+<div id="holidayList">
+
+Loading...
+
+</div>
+
+</div>
+
+</main>
+
+<script src="../api.js"></script>
+
+<script src="holiday.js"></script>
+
+</body>
+
+</html>

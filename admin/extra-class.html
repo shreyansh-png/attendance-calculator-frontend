@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Extra Classes</title>
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<h2>Extra Classes</h2>
+
+<button onclick="window.location='admin-dashboard.html'">
+
+Dashboard
+
+</button>
+
+</nav>
+
+<main class="dashboard">
+
+<div class="login-card">
+
+<h2>
+
+Add Extra Class
+
+</h2>
+
+<form id="extraClassForm">
+
+<label for="batch">Batch</label>
+<input type="number" id="batch" required>
+
+<label for="branch">Branch</label>
+
+<select id="branch" required>
+
+<option value="ECE">ECE</option>
+<option value="CSE-R">CSE-R</option>
+<option value="CSE-AI">CSE-AI</option>
+<option value="CSE-SF">CSE-SF</option>
+<option value="EE">EE</option>
+<option value="ME">ME</option>
+<option value="CE">CE</option>
+<option value="CHE">CHE</option>
+
+</select>
+
+<label for="semester">Semester</label>
+
+<input
+type="number"
+id="semester"
+min="1"
+max="8"
+required>
+
+<label for="section">
+
+Section
+
+</label>
+
+<select id="section">
+
+<option>A</option>
+
+<option>B</option>
+
+<option>A,B</option>
+
+</select>
+
+<label for="subjectId">
+
+Subject
+
+</label>
+
+<select
+id="subjectId"
+required>
+
+<option value="">
+
+Loading Subjects...
+
+</option>
+
+</select>
+
+<label for="teacher">
+
+Teacher
+
+</label>
+
+<input
+type="text"
+id="teacher"
+required>
+
+<label for="room">
+
+Room
+
+</label>
+
+<input
+type="text"
+id="room"
+required>
+
+<label for="date">
+
+Date
+
+</label>
+
+<input
+type="date"
+id="date"
+required>
+
+<label for="startTime">
+
+Start Time
+
+</label>
+
+<input
+type="time"
+id="startTime"
+required>
+
+<label for="endTime">
+
+End Time
+
+</label>
+
+<input
+type="time"
+id="endTime"
+required>
+
+<label for="classType">
+
+Class Type
+
+</label>
+
+<select id="classType">
+
+<option>Theory</option>
+
+<option>Lab</option>
+
+</select>
+
+<button type="submit">
+
+Add Extra Class
+
+</button>
+
+</form>
+
+</div>
+
+<br>
+
+<div class="login-card">
+
+<h2>
+
+Extra Classes
+
+</h2>
+
+<div id="extraClassList">
+
+Loading...
+
+</div>
+
+</div>
+
+</main>
+
+<script src="../api.js"></script>
+
+<script src="extra-class.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Cancel Class</title>
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<h2>Cancel Class</h2>
+
+<button onclick="window.location='admin-dashboard.html'">
+
+Dashboard
+
+</button>
+
+</nav>
+
+<main class="dashboard">
+
+<div class="login-card">
+
+<h2>
+
+Cancel Today's Class
+
+</h2>
+
+<form id="cancelForm">
+
+<label for="batch">
+
+Batch
+
+</label>
+
+<select id="batch">
+
+<option>2029</option>
+
+<option>2030</option>
+
+<option>2031</option>
+
+</select>
+
+<label for="branch">
+
+Branch
+
+</label>
+
+<select id="branch">
+
+<option>ECE</option>
+
+<option>CSE-R</option>
+
+<option>CSE-AI</option>
+
+<option>CSE-SF</option>
+
+<option>EE</option>
+
+<option>ME</option>
+
+<option>CE</option>
+
+<option>CHE</option>
+
+</select>
+
+<label for="semester">
+
+Semester
+
+</label>
+
+<select id="semester">
+
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+
+</select>
+
+<label for="section">
+
+Section
+
+</label>
+
+<select id="section">
+
+<option>A</option>
+
+<option>B</option>
+
+</select>
+
+<label for="day">
+
+Day
+
+</label>
+
+<select id="day">
+
+<option>monday</option>
+<option>tuesday</option>
+<option>wednesday</option>
+<option>thursday</option>
+<option>friday</option>
+<option>saturday</option>
+
+</select>
+
+<label for="classId">
+
+Class
+
+</label>
+
+<select id="classId">
+
+<option>
+
+Select filters first
+
+</option>
+
+</select>
+
+<label for="date">
+
+Date
+
+</label>
+
+<input
+type="date"
+id="date"
+required>
+
+<label for="reason">
+
+Reason
+
+</label>
+
+<textarea
+id="reason"
+required>
+
+</textarea>
+
+<button type="submit">
+
+Cancel Class
+
+</button>
+
+</form>
+
+</div>
+
+</main>
+
+<script src="../api.js"></script>
+
+<script src="cancel-class.js"></script>
+
+</body>
+
+</html>

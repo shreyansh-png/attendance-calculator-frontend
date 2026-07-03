@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | AttendEase</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <div class="login-card">
+
+        <h1>AttendEase Admin</h1>
+
+        <p>Administrator Login</p>
+
+        <form id="adminLoginForm">
+
+            <label for="adminId">
+                Admin ID
+            </label>
+
+            <input
+                type="text"
+                id="adminId"
+                placeholder="Enter Admin ID"
+                required>
+
+            <label for="adminPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Enter Password"
+                required>
+
+            <button type="submit">
+
+                Login
+
+            </button>
+
+        </form>
+
+    </div>
+
+<script src="../api.js"></script>
+<script src="admin.js"></script>
+
+</body>
+
+</html>
