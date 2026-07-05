@@ -139,13 +139,20 @@ async function loadTodayClasses() {
 
                     <p>Room : ${cls.room}</p>
 
-                    <button
-                        id="mark-btn-${cls._id}"
-                        onclick="markClassAttendance('${cls._id}', this)">
-
-                        Present
-
-                    </button>
+                    <div class="attendance-actions" style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button
+                            id="present-btn-${cls._id}"
+                            onclick="markClassAttendance('${cls._id}', 'Present', this)"
+                            style="flex: 1; background: #10b981; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;">
+                            Present
+                        </button>
+                        <button
+                            id="absent-btn-${cls._id}"
+                            onclick="markClassAttendance('${cls._id}', 'Absent', this)"
+                            style="flex: 1; background: #ef4444; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;">
+                            Absent
+                        </button>
+                    </div>
 
                 </div>
 
@@ -170,17 +177,14 @@ async function loadTodayClasses() {
 // Mark Attendance
 // =============================
 
-async function markClassAttendance(classId, button) {
+async function markClassAttendance(classId, status, button) {
 
     try {
 
-        await markAttendance(classId);
+        await markAttendance(classId, status);
 
-        button.innerText = "✔ Present";
-
-        button.disabled = true;
-
-        button.style.opacity = "0.6";
+        const container = button.parentElement;
+        container.innerHTML = `<span style="color: ${status === 'Present' ? '#10b981' : '#ef4444'}; font-weight: bold; padding: 8px 0; display: block; text-align: center;">✔ Marked ${status}</span>`;
 
     }
 

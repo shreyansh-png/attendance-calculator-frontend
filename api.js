@@ -91,9 +91,10 @@ function updateProfile(userData) {
 
 // Attendance
 
-function markAttendance(classId) {
+function markAttendance(classId, status = "Present") {
     return apiRequest("/attendance/mark", "POST", {
-        classId
+        classId,
+        status
     });
 }
 
