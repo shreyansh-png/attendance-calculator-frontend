@@ -73,6 +73,66 @@ async function loadAttendance() {
 // Today's Timetable
 // =============================
 
+function getAttendanceButtonStyle(type, status) {
+
+    const basePresent = "flex: 1; background: #10b981; color: white; border: none; padding: 8px; border-radius: 6px;";
+    const baseAbsent = "flex: 1; background: #ef4444; color: white; border: none; padding: 8px; border-radius: 6px;";
+
+    if (status === "Present" && type === "Present") {
+        return `${basePresent} outline: 3px solid #059669; font-weight: bold; cursor: default;`;
+    }
+
+    if (status === "Absent" && type === "Absent") {
+        return `${baseAbsent} outline: 3px solid #dc2626; font-weight: bold; cursor: default;`;
+    }
+
+    if (status === "Present" || status === "Absent") {
+        return `${type === "Present" ? basePresent : baseAbsent} opacity: 0.45; cursor: not-allowed;`;
+    }
+
+    return `${type === "Present" ? basePresent : baseAbsent} cursor: pointer;`;
+
+}
+
+function renderAttendanceButtons(classId, status) {
+
+    const isMarked = status === "Present" || status === "Absent";
+
+    const presentAttrs = isMarked
+        ? "disabled"
+        : `onclick="markClassAttendance('${classId}', 'Present', this)"`;
+
+    const absentAttrs = isMarked
+        ? "disabled"
+        : `onclick="markClassAttendance('${classId}', 'Absent', this)"`;
+
+    return `
+        <button
+            id="present-btn-${classId}"
+            ${presentAttrs}
+            style="${getAttendanceButtonStyle("Present", status)}">
+            Present
+        </button>
+        <button
+            id="absent-btn-${classId}"
+            ${absentAttrs}
+            style="${getAttendanceButtonStyle("Absent", status)}">
+            Absent
+        </button>
+    `;
+
+}
+
+function renderAttendanceActions(classId, status) {
+
+    return `
+        <div class="attendance-actions" style="display: flex; gap: 10px; margin-top: 10px;">
+            ${renderAttendanceButtons(classId, status)}
+        </div>
+    `;
+
+}
+
 async function loadTodayClasses() {
 
     try {
@@ -129,6 +189,8 @@ async function loadTodayClasses() {
                 ? (typeof cls.subjectId === "object" ? cls.subjectId.subjectName : cls.subjectId)
                 : "Unknown Subject";
 
+            const attendanceStatus = cls.attendanceStatus || "Pending";
+
             container.innerHTML += `
 
                 <div class="class-card">
@@ -139,20 +201,7 @@ async function loadTodayClasses() {
 
                     <p>Room : ${cls.room}</p>
 
-                    <div class="attendance-actions" style="display: flex; gap: 10px; margin-top: 10px;">
-                        <button
-                            id="present-btn-${cls._id}"
-                            onclick="markClassAttendance('${cls._id}', 'Present', this)"
-                            style="flex: 1; background: #10b981; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;">
-                            Present
-                        </button>
-                        <button
-                            id="absent-btn-${cls._id}"
-                            onclick="markClassAttendance('${cls._id}', 'Absent', this)"
-                            style="flex: 1; background: #ef4444; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer;">
-                            Absent
-                        </button>
-                    </div>
+                    ${renderAttendanceActions(cls._id, attendanceStatus)}
 
                 </div>
 
@@ -179,16 +228,28 @@ async function loadTodayClasses() {
 
 async function markClassAttendance(classId, status, button) {
 
+    const container = button.parentElement;
+    const buttons = container.querySelectorAll("button");
+
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.cursor = "not-allowed";
+    });
+
     try {
 
         await markAttendance(classId, status);
 
-        const container = button.parentElement;
-        container.innerHTML = `<span style="color: ${status === 'Present' ? '#10b981' : '#ef4444'}; font-weight: bold; padding: 8px 0; display: block; text-align: center;">✔ Marked ${status}</span>`;
+        container.innerHTML = renderAttendanceButtons(classId, status);
 
     }
 
     catch (error) {
+
+        buttons.forEach(btn => {
+            btn.disabled = false;
+            btn.style.cursor = "pointer";
+        });
 
         alert(error.message || "Could not mark attendance.");
 
