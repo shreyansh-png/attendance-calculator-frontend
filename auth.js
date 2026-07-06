@@ -19,6 +19,8 @@ if (loginForm) {
 
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
+        const submitBtn = document.getElementById("login-btn");
+        const defaultText = submitBtn.innerText;
 
         if (!email || !password) {
 
@@ -27,6 +29,9 @@ if (loginForm) {
             return;
 
         }
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Logging in...";
 
         try {
 
@@ -55,6 +60,9 @@ if (loginForm) {
             alert(error.message || "Server Error. Please try again.");
 
             console.log(error);
+
+            submitBtn.disabled = false;
+            submitBtn.innerText = defaultText;
 
         }
 
@@ -96,6 +104,8 @@ if (registerForm) {
         const password = document.getElementById("password").value;
 
         const confirmPassword = document.getElementById("confirmPassword").value;
+        const submitBtn = document.getElementById("register-btn");
+        const defaultText = submitBtn.innerText;
 
         if (
 
@@ -133,6 +143,9 @@ if (registerForm) {
 
         }
 
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Creating Account...";
+
         try {
 
             await registerUser({
@@ -166,6 +179,9 @@ if (registerForm) {
             alert(error.message || "Server Error. Please try again.");
 
             console.log(error);
+
+            submitBtn.disabled = false;
+            submitBtn.innerText = defaultText;
 
         }
 

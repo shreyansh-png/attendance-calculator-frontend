@@ -73,6 +73,12 @@ function registerUser(userData) {
 
 }
 
+function forgotPassword(email, newPassword) {
+
+    return apiRequest("/users/forgot-password", "POST", { email, newPassword });
+
+}
+
 function logoutUser() {
 
     return apiRequest("/users/logout", "POST");
