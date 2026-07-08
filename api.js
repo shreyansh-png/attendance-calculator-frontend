@@ -6,7 +6,14 @@ const BASE_URL = "https://attendance-calculator-backend-2.onrender.com/api/v1";
 
 async function apiRequest(endpoint, method = "GET", body = null) {
 
-    const token = localStorage.getItem("accessToken") || localStorage.getItem("adminToken");
+    const isBrowser = typeof window !== "undefined";
+    const isAdminPage = isBrowser && window.location.pathname.includes("/admin/");
+    const isLoginEndpoint = endpoint === "/users/login" || endpoint === "/admin/login";
+    const token = isLoginEndpoint
+        ? null
+        : isAdminPage
+            ? localStorage.getItem("adminToken")
+            : localStorage.getItem("accessToken");
 
     const options = {
 
@@ -32,8 +39,8 @@ async function apiRequest(endpoint, method = "GET", body = null) {
 
     const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
-    // Auto logout if token expires
-    if (response.status === 401) {
+    // Auto logout only for authenticated requests, not login attempts
+    if (response.status === 401 && token) {
 
         localStorage.clear();
 
