@@ -6,11 +6,11 @@ form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
 
-    const adminId = document.getElementById("adminId").value.trim();
-
+    const adminEmail = document.getElementById("adminEmail").value.trim();
     const password = document.getElementById("adminPassword").value.trim();
+    const submitBtn = form.querySelector('button[type="submit"]');
 
-    if (!adminId || !password) {
+    if (!adminEmail || !password) {
 
         alert("Please fill all fields.");
 
@@ -18,23 +18,21 @@ form.addEventListener("submit", async function (e) {
 
     }
 
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Logging in...";
+
     try {
 
-        const response = await adminLogin(adminId, password);
+        const response = await adminLogin(adminEmail, password);
 
-        // apiRequest already throws on error, so if we reach here it's success
-        // Token may be in response.data.token or response.token
-        const token = (response.data && response.data.token) ||
-                      (response.data && response.data.accessToken) ||
-                      response.token ||
-                      response.accessToken;
+        const token = (response.data && response.data.token) || response.token;
 
-        if (token) {
-            localStorage.setItem("adminToken", token);
-        } else {
-            // Store whatever came back so auth guard doesn't trip
-            localStorage.setItem("adminToken", "admin_session");
+        if (!token) {
+            throw new Error("Admin token missing from login response.");
         }
+
+        localStorage.setItem("adminToken", token);
+        localStorage.removeItem("accessToken");
 
         window.location.href = "admin-dashboard.html";
 
@@ -43,6 +41,8 @@ form.addEventListener("submit", async function (e) {
     catch (error) {
 
         alert(error.message || "Login failed. Check your credentials.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Login";
 
     }
 
