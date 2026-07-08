@@ -1,4 +1,4 @@
-// forgotpassword.js - Reset password without login
+// forgotpassword.js — Reset password without login
 
 const forgotPasswordForm = document.getElementById("forgot-password-form");
 
@@ -12,47 +12,44 @@ if (forgotPasswordForm) {
 
         e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
-        const newPassword = document.getElementById("newPassword").value;
+        const email           = document.getElementById("email").value.trim();
+        const newPassword     = document.getElementById("newPassword").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
-        const submitBtn = document.getElementById("reset-btn");
-        const defaultText = submitBtn.innerText;
+        const submitBtn       = document.getElementById("reset-btn");
 
         if (!email || !newPassword || !confirmPassword) {
-
-            alert("Please fill all fields.");
-
+            showToast("warning", "Please fill in all fields.");
             return;
-
         }
 
         if (newPassword !== confirmPassword) {
-
-            alert("Passwords do not match.");
-
+            showToast("error", "Passwords do not match.");
             return;
-
         }
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Resetting...";
+        if (newPassword.length < 6) {
+            showToast("warning", "Password must be at least 6 characters.");
+            return;
+        }
+
+        submitBtn.disabled  = true;
+        submitBtn.innerHTML = '<span class="btn-spinner"></span> Resetting…';
 
         try {
 
             await forgotPassword(email, newPassword);
 
-            alert("Password reset successfully! Please login.");
+            showToast("success", "Password reset successfully! Redirecting to login…");
 
-            window.location.href = "login.html";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
 
-        }
+        } catch (error) {
 
-        catch (error) {
-
-            alert(error.message || "Could not reset password.");
-
-            submitBtn.disabled = false;
-            submitBtn.innerText = defaultText;
+            showToast("error", error.message || "Could not reset password. Please try again.");
+            submitBtn.disabled  = false;
+            submitBtn.innerHTML = "Reset Password";
 
         }
 

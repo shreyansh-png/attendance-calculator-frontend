@@ -4,13 +4,12 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="AttendEase Dashboard — Today's schedule and attendance overview.">
     <title>Dashboard | AttendEase</title>
 
     <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="toast.css">
     <link rel="stylesheet" href="dashboard.css">
 
 </head>
@@ -18,117 +17,101 @@
 <body>
 
     <!-- Navbar -->
-
     <nav class="navbar">
-
-        <h2>AttendEase</h2>
-
-        <button id="logoutBtn">Logout</button>
-
+        <div class="brand">🎓 AttendEase</div>
+        <button id="logoutBtn">🚪 Logout</button>
     </nav>
 
     <!-- Main -->
-
     <main class="dashboard">
 
-        <!-- Greeting -->
-
+        <!-- Welcome Card -->
         <section class="welcome-card">
-
-            <h1 id="greeting">
-
-                Good Morning 👋
-
-            </h1>
-
-            <p id="studentName">
-
-                Loading...
-
-            </p>
-
+            <div class="welcome-text">
+                <h1 id="greeting">Good Morning 👋</h1>
+                <p id="studentName" class="skeleton skeleton-line medium" style="height:20px;width:200px;"></p>
+            </div>
+            <div class="welcome-date">
+                <span id="currentDate"></span>
+            </div>
         </section>
 
-        <!-- Statistics -->
-
+        <!-- Stats -->
         <section class="stats">
 
-            <div class="stat-card">
-
-                <h3>Overall Attendance</h3>
-
-                <h1 id="overallAttendance">
-
-                    --
-
-                </h1>
-
+            <div class="stat-card" id="stat-overall">
+                <div class="stat-icon">📊</div>
+                <div class="stat-body">
+                    <p class="stat-label">Overall Attendance</p>
+                    <h2 id="overallAttendance" class="stat-value skeleton skeleton-line short" style="height:36px;width:80px;">--</h2>
+                </div>
             </div>
 
-            <div class="stat-card">
-
-                <h3>Today's Classes</h3>
-
-                <h1 id="todayClassCount">
-
-                    --
-
-                </h1>
-
+            <div class="stat-card" id="stat-today">
+                <div class="stat-icon">📅</div>
+                <div class="stat-body">
+                    <p class="stat-label">Today's Classes</p>
+                    <h2 id="todayClassCount" class="stat-value skeleton skeleton-line short" style="height:36px;width:60px;">--</h2>
+                </div>
             </div>
 
         </section>
 
         <!-- Today's Classes -->
+        <section class="classes-section">
 
-        <section>
-
-            <h2>
-
-                Today's Schedule
-
-            </h2>
+            <div class="section-header">
+                <h2>Today's Schedule</h2>
+            </div>
 
             <div id="todayClasses">
-
+                <!-- Skeleton loaders -->
+                <div class="class-card skeleton-card">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-line medium"></div>
+                    <div class="skeleton skeleton-line short"></div>
+                </div>
+                <div class="class-card skeleton-card">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-line medium"></div>
+                    <div class="skeleton skeleton-line short"></div>
+                </div>
             </div>
 
         </section>
 
         <!-- Quick Actions -->
+        <section class="actions-section">
+            <h2>Quick Actions</h2>
+            <div class="actions">
 
-        <section class="actions">
+                <button id="attendanceBtn" class="action-btn">
+                    <span class="action-icon">📊</span>
+                    <span>Attendance</span>
+                </button>
 
-            <button id="attendanceBtn">
+                <button id="predictionBtn" class="action-btn">
+                    <span class="action-icon">📈</span>
+                    <span>Prediction</span>
+                </button>
 
-                Attendance
+                <button id="timetableBtn" class="action-btn">
+                    <span class="action-icon">📅</span>
+                    <span>Timetable</span>
+                </button>
 
-            </button>
+                <button id="profileBtn" class="action-btn">
+                    <span class="action-icon">👤</span>
+                    <span>Profile</span>
+                </button>
 
-            <button id="predictionBtn">
-
-                Prediction
-
-            </button>
-
-            <button id="timetableBtn">
-
-                Timetable
-
-            </button>
-
-            <button id="profileBtn">
-
-                Profile
-
-            </button>
-
+            </div>
         </section>
 
     </main>
 
+    <script src="toast.js"></script>
     <script src="api.js"></script>
-
     <script src="dashboard.js"></script>
 
 </body>

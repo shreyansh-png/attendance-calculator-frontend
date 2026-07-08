@@ -3,93 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AttendEase</title>
-
+    <meta name="description" content="AttendEase — Smart Attendance Management System for students. Track attendance, manage timetables, and predict your attendance status.">
+    <title>AttendEase — Smart Attendance Management</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toast.css">
+    <style>
+        body { background: #fff; }
 
-  </head>
+        header {
+            padding: 18px 60px;
+        }
+
+        .nav-actions { display: flex; gap: 10px; }
+        .nav-actions button { padding: 9px 22px; font-size: 13px; }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 55%, #3b82f6 100%);
+            padding: 90px 40px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: -40px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+
+        .hero-section h1 {
+            color: #fff;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section p {
+            color: rgba(255,255,255,0.8);
+            font-size: 1.15rem;
+            margin-bottom: 40px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-btns .btn-white {
+            background: #fff;
+            color: #1d4ed8;
+            border: none;
+            padding: 14px 36px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .hero-btns .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+        }
+
+        .hero-btns .btn-ghost {
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1.5px solid rgba(255,255,255,0.5);
+            padding: 14px 36px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 10px;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .hero-btns .btn-ghost:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .features-section {
+            padding: 80px 40px;
+            background: #f0f4f8;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            margin-bottom: 48px;
+            font-size: 1.75rem;
+            color: #1e3a8a;
+        }
+
+        .features-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 28px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+        }
+
+        .feature-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 18px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.65;
+        }
+
+        footer {
+            background: #1e3a8a;
+            color: rgba(255,255,255,0.6);
+            padding: 28px 40px;
+            text-align: center;
+            font-size: 13px;
+            border-top: none;
+        }
+
+        footer strong { color: #fff; }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .hero-section h1 { font-size: 2rem; }
+            header { padding: 16px 20px; }
+            .features-section { padding: 60px 20px; }
+        }
+    </style>
+</head>
 <body>
 
     <header>
-
-        <h1 class="logo">🎓 AttendEase</h1>
-
+        <div class="logo">🎓 AttendEase</div>
+        <div class="nav-actions">
+            <button id="login-btn" class="btn btn-primary">Login</button>
+            <button id="register-btn" class="btn-outline btn">Create Account</button>
+        </div>
     </header>
 
-    <main>
+    <section class="hero-section">
+        <h1>Smart Attendance<br>Management System</h1>
+        <p>Track your attendance, manage timetables, and know exactly how many classes you can afford to skip — all in one place.</p>
+        <div class="hero-btns">
+            <button id="hero-login-btn" class="btn-white">Get Started →</button>
+            <button id="hero-register-btn" class="btn-ghost">Create Free Account</button>
+        </div>
+    </section>
 
-        <!-- Hero Section -->
-
-        <section class="hero">
-
-            <h2>Smart Attendance Management System</h2>
-
-            <p>
-                Track attendance, manage your timetable,
-                and stay above the attendance criteria with ease.
-            </p>
-
-            <div class="buttons">
-
-                <button id="login-btn">
-                    Login
-                </button>
-
-                <button id="register-btn" class="secondary">
-
-                    Create Account
-
-                </button>
-
+    <section class="features-section">
+        <h2>Everything You Need</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="icon">📊</span>
+                <h3>Attendance Tracking</h3>
+                <p>Monitor subject-wise attendance and your overall percentage with beautiful charts and reports.</p>
             </div>
-
-        </section>
-
-        <!-- Features -->
-
-        <section class="features">
-
-            <div class="card">
-
-                <h3>📊 Attendance</h3>
-
-                <p>
-                    Monitor subject-wise attendance and overall percentage.
-                </p>
-
+            <div class="feature-card">
+                <span class="icon">📅</span>
+                <h3>Smart Timetable</h3>
+                <p>View your complete weekly schedule with teacher names, rooms, and timings — always up to date.</p>
             </div>
-
-            <div class="card">
-
-                <h3>📅 Timetable</h3>
-
-                <p>
-                    View your weekly timetable anytime.
-                </p>
-
+            <div class="feature-card">
+                <span class="icon">📈</span>
+                <h3>Attendance Prediction</h3>
+                <p>AI-powered prediction tells you exactly how many classes you can safely miss to stay above 75%.</p>
             </div>
-
-            <div class="card">
-
-                <h3>📈 Prediction</h3>
-
-                <p>
-                    Know how many classes you can safely miss.
-                </p>
-
-            </div>
-
-        </section>
-
-    </main>
+        </div>
+    </section>
 
     <footer>
-
-        © 2026 AttendEase • Built for Students ❤️
-
+        <p>© 2026 <strong>AttendEase</strong> • Built with ❤️ for IET Lucknow students</p>
     </footer>
 
+    <script src="toast.js"></script>
     <script src="script.js"></script>
+    <script>
+        document.getElementById("login-btn").addEventListener("click", () => window.location.href = "login.html");
+        document.getElementById("register-btn").addEventListener("click", () => window.location.href = "register.html");
+        document.getElementById("hero-login-btn").addEventListener("click", () => window.location.href = "login.html");
+        document.getElementById("hero-register-btn").addEventListener("click", () => window.location.href = "register.html");
+    </script>
 
 </body>
 </html>

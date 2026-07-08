@@ -3,46 +3,56 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weekly Timetable — AttendEase.">
+    <title>Timetable | AttendEase</title>
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Timetable | AttendEase</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="timetable.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="timetable.css">
 
 </head>
 
 <body>
 
 <nav class="navbar">
-
-<h2>AttendEase</h2>
-
-<button onclick="window.location='dashboard.html'">
-
-Dashboard
-
-</button>
-
+    <div class="brand">🎓 AttendEase</div>
+    <button onclick="window.location='dashboard.html'">← Dashboard</button>
 </nav>
 
 <main class="timetable-page">
 
-<h1>
+    <div class="page-header">
+        <h1>📅 Weekly Timetable</h1>
+        <p>Your complete weekly class schedule.</p>
+    </div>
 
-Weekly Timetable
-
-</h1>
-
-<div id="timetableContainer">
-
-</div>
+    <div id="timetableContainer">
+        <!-- Skeleton -->
+        <div class="day-card skeleton-day">
+            <div class="day-header">
+                <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
+            </div>
+            <div class="class-card skeleton-card" style="margin-top:12px;">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-line medium"></div>
+            </div>
+        </div>
+        <div class="day-card skeleton-day">
+            <div class="day-header">
+                <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
+            </div>
+            <div class="class-card skeleton-card" style="margin-top:12px;">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-line medium"></div>
+            </div>
+        </div>
+    </div>
 
 </main>
 
+<script src="toast.js"></script>
 <script src="api.js"></script>
 <script src="timetable.js"></script>
 

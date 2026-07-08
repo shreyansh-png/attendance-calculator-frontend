@@ -1,71 +1,142 @@
-.attendance-page{
+/* ============================================================
+   ATTENDANCE PAGE STYLES — AttendEase
+   ============================================================ */
 
-    width:90%;
-
-    max-width:1100px;
-
-    margin:40px auto;
-
+.attendance-page {
+    width: 92%;
+    max-width: 1000px;
+    margin: 32px auto 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
 }
 
-.overall-card{
-
-    background:white;
-
-    padding:30px;
-
-    border-radius:15px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-    margin-bottom:30px;
-
+/* ── Page Header ── */
+.page-header {
+    margin-bottom: 4px;
 }
 
-.overall-card h1{
-
-    color:#2563eb;
-
-    margin-top:15px;
-
+.page-header h1 {
+    font-size: 1.6rem;
+    color: var(--gray-800);
+    margin-bottom: 4px;
 }
 
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    background:white;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
+.page-header p {
+    color: var(--gray-500);
+    font-size: 14px;
 }
 
-th{
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:15px;
-
+/* ── Overall Card ── */
+.overall-card {
+    background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
+    padding: 28px 36px;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 8px 28px rgba(30, 64, 175, 0.28);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
 }
 
-td{
-
-    padding:15px;
-
-    text-align:center;
-
-    border-bottom:1px solid #eee;
-
+.overall-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
 }
 
-tr:hover{
+#overallAttendance {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    background: none !important;
+    animation: none !important;
+    width: auto !important;
+    height: auto !important;
+}
 
-    background:#f5f5f5;
+.overall-icon {
+    font-size: 3.5rem;
+    opacity: 0.3;
+}
 
+/* ── Table Wrapper ── */
+.table-wrapper {
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+}
+
+.table-wrapper h2 {
+    padding: 20px 24px 16px;
+    font-size: 1rem;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--color-border);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-surface);
+}
+
+thead th {
+    background: var(--blue-800);
+    color: #fff;
+    padding: 14px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-align: left;
+}
+
+thead th:first-child { border-radius: 0; }
+
+tbody td {
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--gray-700);
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: middle;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--blue-50);
+}
+
+/* ── Percentage Color Badges ── */
+.pct-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.pct-good    { background: var(--green-100); color: var(--green-700); }
+.pct-warning { background: var(--amber-50);  color: #b45309; }
+.pct-danger  { background: var(--red-100);   color: var(--red-600); }
+
+/* ── Skeleton rows ── */
+.skeleton-row td { padding: 16px 18px; }
+.skeleton-row td div { margin: 0; height: 14px; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .attendance-page { width: 95%; }
+    .overall-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .overall-icon { display: none; }
+    #overallAttendance { font-size: 2rem; }
+
+    table { display: block; overflow-x: auto; white-space: nowrap; }
 }

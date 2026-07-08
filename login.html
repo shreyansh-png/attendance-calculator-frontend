@@ -4,12 +4,12 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Login to AttendEase — your smart attendance management system.">
     <title>Login | AttendEase</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toast.css">
 
 </head>
 
@@ -19,69 +19,57 @@
 
         <div class="login-card">
 
+            <div class="brand-logo">🎓</div>
 
             <h2>Welcome Back 👋</h2>
 
-            <p>
-                Login to continue managing your attendance.
-            </p>
+            <p>Login to manage your attendance & schedule.</p>
 
             <p class="form-hint">
-                Verification Code = Last 2 digits of Roll Number + Branch (Example: 67ECE)
+                💡 Verification Code = Last 2 digits of Roll No. + Branch<br>
+                <strong>Example:</strong> 67ECE
             </p>
 
             <form id="login-form">
 
-                <label>Email</label>
+                <div class="field-group">
+                    <label for="email">Email Address</label>
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    required
-                >
+                <div class="field-group">
+                    <label for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
 
-                <label>Password</label>
+                <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                >
-
-                <a href="forgot-password.html" class="forgot-password">
-                    Forgot Password?
-                </a>
-
-                <button type="submit" id="login-btn">
-
-                    Login
-
-                </button>
+                <button type="submit" id="login-btn">Login</button>
 
             </form>
 
             <div class="bottom-text">
-
-                <p>
-
-                    Don't have an account?
-
-                </p>
-
-                <a href="register.html">
-
-                    Create Account
-
-                </a>
-
+                <p>Don't have an account? <a href="register.html">Create Account</a></p>
             </div>
 
         </div>
 
     </div>
-<script src="api.js"></script>
+
+    <script src="toast.js"></script>
+    <script src="api.js"></script>
     <script src="auth.js"></script>
 
 </body>
