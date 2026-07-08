@@ -154,7 +154,7 @@ async function changePassword(data) {
 
 }
 
-async function adminLogin(adminId, password) {
+async function adminLogin(adminEmail, password) {
 
     return apiRequest(
 
@@ -164,7 +164,7 @@ async function adminLogin(adminId, password) {
 
         {
 
-            adminId,
+            adminEmail,
 
             password
 

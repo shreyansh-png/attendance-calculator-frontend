@@ -166,7 +166,51 @@ button:hover {
 
     max-width: 1000px;
 
-    margin: 50px auto;
+    margin: 24px auto 50px;
+
+}
+
+.admin-dashboard {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+.admin-hero {
+
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+    padding: 22px 26px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+
+}
+
+.admin-hero h1 {
+
+    margin: 0 0 6px;
+
+    color: #111827;
+
+    font-size: 28px;
+
+}
+
+.admin-hero p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-weight: 600;
 
 }
 
@@ -176,17 +220,19 @@ button:hover {
 
     grid-template-columns: repeat(2, 1fr);
 
-    gap: 25px;
+    gap: 16px;
 
-    margin-top: 40px;
+    margin-top: 0;
 
 }
 
 .admin-grid button {
 
-    padding: 35px;
+    min-height: 96px;
 
-    font-size: 20px;
+    padding: 24px;
+
+    font-size: 18px;
 
     border: none;
 
