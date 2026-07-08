@@ -1,4 +1,4 @@
-// auth.js - handles login and registration using api.js functions
+// auth.js — handles login and registration using api.js functions
 
 // ===========================
 // Login Form
@@ -17,52 +17,38 @@ if (loginForm) {
 
         e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
+        const email    = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
         const submitBtn = document.getElementById("login-btn");
-        const defaultText = submitBtn.innerText;
 
         if (!email || !password) {
-
-            alert("Please fill all fields.");
-
+            showToast("warning", "Please fill in all fields.");
             return;
-
         }
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Logging in...";
+        // Loading state
+        submitBtn.disabled  = true;
+        submitBtn.innerHTML = '<span class="btn-spinner"></span> Logging in…';
 
         try {
 
             const data = await loginUser(email, password);
 
-            // Save Token
-            localStorage.setItem(
-                "accessToken",
-                data.data.accessToken
-            );
+            // Save Token & User
+            localStorage.setItem("accessToken", data.data.accessToken);
+            localStorage.setItem("user",        JSON.stringify(data.data.user));
 
-            // Save User
-            localStorage.setItem(
-                "user",
-                JSON.stringify(data.data.user)
-            );
+            showToast("success", "Login successful! Redirecting…");
 
-            alert("Login Successful!");
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 900);
 
-            window.location.href = "dashboard.html";
+        } catch (error) {
 
-        }
-
-        catch (error) {
-
-            alert(error.message || "Server Error. Please try again.");
-
-            console.log(error);
-
-            submitBtn.disabled = false;
-            submitBtn.innerText = defaultText;
+            showToast("error", error.message || "Login failed. Please check your credentials.");
+            submitBtn.disabled  = false;
+            submitBtn.innerHTML = "Login";
 
         }
 
@@ -87,101 +73,60 @@ if (registerForm) {
 
         e.preventDefault();
 
-        const fullName = document.getElementById("fullName").value.trim();
-
-        const rollNumber = document.getElementById("rollNo").value.trim();
-
-        const academicYear = document.getElementById("batch").value;
-
-        const email = document.getElementById("email").value.trim();
-
-        const branch = document.getElementById("branch").value;
-
-        const semester = document.getElementById("semester").value;
-
-        const section = document.getElementById("section").value;
-
-        const password = document.getElementById("password").value;
-
+        const fullName        = document.getElementById("fullName").value.trim();
+        const rollNumber      = document.getElementById("rollNo").value.trim();
+        const academicYear    = document.getElementById("batch").value;
+        const email           = document.getElementById("email").value.trim();
+        const branch          = document.getElementById("branch").value;
+        const semester        = document.getElementById("semester").value;
+        const section         = document.getElementById("section").value;
+        const password        = document.getElementById("password").value;
         const confirmPassword = document.getElementById("confirmPassword").value;
-        const submitBtn = document.getElementById("register-btn");
-        const defaultText = submitBtn.innerText;
+        const submitBtn       = document.getElementById("register-btn");
 
-        if (
-
-            !fullName ||
-
-            !rollNumber ||
-
-            !email ||
-
-            !branch ||
-
-            !semester ||
-
-            !section ||
-
-            !academicYear ||
-
-            !password ||
-
-            !confirmPassword
-
-        ) {
-
-            alert("Please fill all fields.");
-
+        if (!fullName || !rollNumber || !email || !branch || !semester || !section || !academicYear || !password || !confirmPassword) {
+            showToast("warning", "Please fill in all fields.");
             return;
-
         }
 
         if (password !== confirmPassword) {
-
-            alert("Passwords do not match.");
-
+            showToast("error", "Passwords do not match. Please try again.");
             return;
-
         }
 
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Creating Account...";
+        if (password.length < 6) {
+            showToast("warning", "Password must be at least 6 characters.");
+            return;
+        }
+
+        // Loading state
+        submitBtn.disabled  = true;
+        submitBtn.innerHTML = '<span class="btn-spinner"></span> Creating Account…';
 
         try {
 
             await registerUser({
-
                 fullName,
-
                 rollNumber,
-
                 email,
-
                 password,
-
-                semester: Number(semester),
-
+                semester:  Number(semester),
                 branch,
-
                 section,
-
                 batch: Number(academicYear)
-
             });
 
-            alert("Registration Successful! Please login.");
+            showToast("success", "Account created! Redirecting to login…");
 
-            window.location.href = "login.html";
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1200);
 
-        }
+        } catch (error) {
 
-        catch (error) {
-
-            alert(error.message || "Server Error. Please try again.");
-
-            console.log(error);
-
-            submitBtn.disabled = false;
-            submitBtn.innerText = defaultText;
+            showToast("error", error.message || "Registration failed. Please try again.");
+            submitBtn.disabled  = false;
+            submitBtn.innerHTML = "Create Account";
 
         }
 

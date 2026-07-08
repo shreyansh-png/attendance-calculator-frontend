@@ -37,14 +37,18 @@ async function apiRequest(endpoint, method = "GET", body = null) {
 
         localStorage.clear();
 
-        alert("Session expired. Please login again.");
+        if (typeof showToast === "function") {
+            showToast("warning", "Session expired. Please login again.");
+        }
 
         // Redirect to the correct login page based on context
-        if (window.location.pathname.includes("/admin/")) {
-            window.location.href = "admin-login.html";
-        } else {
-            window.location.href = "../login.html";
-        }
+        setTimeout(() => {
+            if (window.location.pathname.includes("/admin/")) {
+                window.location.href = "admin-login.html";
+            } else {
+                window.location.href = "../login.html";
+            }
+        }, 1500);
 
         return;
 
