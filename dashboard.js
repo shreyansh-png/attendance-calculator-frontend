@@ -84,6 +84,7 @@ function renderAttendanceButtons(classId, status) {
             : `<span class="attendance-badge absent">❌ Absent</span>`;
 
         return `
+            ${badge}
             <div class="attendance-actions">
                 <button class="att-btn ${isPresent ? "selected-present" : "deselected"}" disabled>
                     ✓ Present
