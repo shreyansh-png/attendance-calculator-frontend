@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>My Profile | AttendEase</title>
-
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="profile.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
 <nav class="navbar">
-
-    <h2>AttendEase</h2>
-
+    <div class="brand">
+        <i data-lucide="graduation-cap"></i> AttendEase
+    </div>
     <button onclick="window.location='dashboard.html'">
-
-        Dashboard
-
+        <i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard
     </button>
-
 </nav>
 
 <main class="profile-page">
@@ -34,89 +24,55 @@
 <div class="profile-card">
 
 <h1>
-
-My Profile
-
+    <i data-lucide="user-circle" style="width:28px;height:28px;"></i>
+    My Profile
 </h1>
 
 <div class="profile-row">
-
-<label>Full Name</label>
-
-<p id="fullName">Loading...</p>
-
+    <label>Full Name</label>
+    <p id="fullName">Loading...</p>
 </div>
 
 <div class="profile-row">
-
-<label>Email</label>
-
-<p id="email"></p>
-
+    <label>Email</label>
+    <p id="email"></p>
 </div>
 
 <div class="profile-row">
-
-<label>Roll Number</label>
-
-<p id="rollNumber"></p>
-
+    <label>Roll Number</label>
+    <p id="rollNumber"></p>
 </div>
 
 <div class="profile-row">
-
-<label>Branch</label>
-
-<p id="branch"></p>
-
+    <label>Branch</label>
+    <p id="branch"></p>
 </div>
 
 <div class="profile-row">
-
-<label>Semester</label>
-
-<p id="semester"></p>
-
+    <label>Semester</label>
+    <p id="semester"></p>
 </div>
 
 <div class="profile-row">
-
-<label>Section</label>
-
-<p id="section"></p>
-
+    <label>Section</label>
+    <p id="section"></p>
 </div>
 
 <div class="profile-row">
-
-<label>Passing Year</label>
-
-<p id="academicYear"></p>
-
+    <label>Passing Year</label>
+    <p id="academicYear"></p>
 </div>
 
 <div class="buttons">
-
-<button id="editBtn">
-
-Edit Profile
-
-</button>
-
-<button
-id="saveBtn"
-style="display:none;">
-
-Save Changes
-
-</button>
-
-<button id="changePasswordBtn">
-
-Change Password
-
-</button>
-
+    <button id="editBtn">
+        <i data-lucide="pencil" style="width:14px;height:14px;"></i> Edit Profile
+    </button>
+    <button id="saveBtn" style="display:none;">
+        <i data-lucide="save" style="width:14px;height:14px;"></i> Save Changes
+    </button>
+    <button id="changePasswordBtn" class="btn-secondary">
+        <i data-lucide="lock" style="width:14px;height:14px;"></i> Change Password
+    </button>
 </div>
 
 </div>
@@ -124,9 +80,9 @@ Change Password
 </main>
 
 <script src="api.js"></script>
-
 <script src="profile.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

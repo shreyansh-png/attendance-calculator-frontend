@@ -1,52 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Prediction | AttendEase</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="stylesheet" href="prediction.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction | AttendEase</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="prediction.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
 <nav class="navbar">
-
-<h2>AttendEase</h2>
-
-<button onclick="window.location='dashboard.html'">
-
-Dashboard
-
-</button>
-
+    <div class="brand">
+        <i data-lucide="graduation-cap"></i> AttendEase
+    </div>
+    <button onclick="window.location='dashboard.html'">
+        <i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard
+    </button>
 </nav>
 
 <main class="prediction-page">
 
 <h1>
-
-Attendance Prediction
-
+    <i data-lucide="trending-up"></i>
+    Attendance Prediction
 </h1>
 
 <div id="predictionContainer">
-
 </div>
 
 </main>
 
 <script src="api.js"></script>
-
 <script src="prediction.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

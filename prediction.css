@@ -1,45 +1,58 @@
-.prediction-page{
+/* ============================================================
+   PREDICTION PAGE STYLES — Premium Dark Theme
+   ============================================================ */
 
-width:90%;
-
-max-width:1100px;
-
-margin:40px auto;
-
+.prediction-page {
+    width: 100%;
+    max-width: 1200px;
+    margin: 32px auto 60px;
+    padding: 0 32px;
 }
 
-.prediction-card{
-
-background:white;
-
-padding:25px;
-
-border-radius:15px;
-
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-
-margin-bottom:20px;
-
+.prediction-page h1 {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.prediction-card h2{
-
-margin-bottom:10px;
-
+.prediction-card {
+    background: var(--color-card);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 16px;
+    transition: var(--transition);
 }
 
-.good{
-
-color:green;
-
-font-weight:bold;
-
+.prediction-card:hover {
+    border-color: var(--color-border-hover);
 }
 
-.bad{
+.prediction-card h2 {
+    margin-bottom: 12px;
+    font-size: 1.125rem;
+    color: var(--color-text);
+}
 
-color:red;
+.prediction-card p {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
 
-font-weight:bold;
+.good {
+    color: var(--success);
+    font-weight: 600;
+}
 
+.bad {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .prediction-page { padding: 0 16px; margin: 24px auto 40px; }
 }

@@ -44,11 +44,12 @@ async function loadTimetable() {
             const anyDays = Object.keys(schedule);
             if (anyDays.length === 0) {
                 container.innerHTML = `
-                    <div style="text-align:center;padding:60px 20px;background:#fff;border-radius:16px;box-shadow:var(--shadow-md);">
-                        <div style="font-size:3rem;margin-bottom:16px;">📭</div>
-                        <h3 style="color:var(--gray-600);">No Timetable Found</h3>
-                        <p style="color:var(--gray-400);margin-top:8px;">Either you're incredibly lucky or the admin forgot. Either way — enjoy! 🎉</p>
+                    <div style="text-align:center;padding:60px 20px;background:var(--color-card);border:1px solid var(--color-border);border-radius:16px;box-shadow:var(--shadow-md);">
+                        <div style="margin-bottom:16px;color:var(--color-text-muted);display:flex;justify-content:center;"><i data-lucide="inbox" style="width:48px;height:48px;"></i></div>
+                        <h3 style="color:var(--color-text);">No Timetable Found</h3>
+                        <p style="color:var(--color-text-secondary);margin-top:8px;">Either you're incredibly lucky or the admin forgot. Either way — enjoy!</p>
                     </div>`;
+                if (window.lucide) window.lucide.createIcons();
                 return;
             }
             days.push(...anyDays);
@@ -81,7 +82,7 @@ async function loadTimetable() {
 
                 classesDiv.innerHTML = `
                     <div class="no-classes">
-                        <span style="font-size:1.5rem;">🎉</span>
+                        <i data-lucide="coffee" style="width:32px;height:32px;color:var(--color-primary);"></i>
                         <p style="margin-top:6px;">No classes — it's a free slot! Go touch some grass or sleep in the canteen.</p>
                     </div>`;
 
@@ -104,9 +105,9 @@ async function loadTimetable() {
                                 <span class="${badgeCls}">${typeLabel}</span>
                             </h3>
                             <div class="class-meta">
-                                <span class="class-meta-item">🕐 ${cls.startTime} – ${cls.endTime}</span>
-                                <span class="class-meta-item">📍 Room ${cls.room || "N/A"}</span>
-                                ${cls.teacher ? `<span class="class-meta-item">👨‍🏫 ${cls.teacher}</span>` : ""}
+                                <span class="class-meta-item"><i data-lucide="clock" style="width:14px;height:14px;"></i> ${cls.startTime} – ${cls.endTime}</span>
+                                <span class="class-meta-item"><i data-lucide="map-pin" style="width:14px;height:14px;"></i> Room ${cls.room || "N/A"}</span>
+                                ${cls.teacher ? `<span class="class-meta-item"><i data-lucide="user" style="width:14px;height:14px;"></i> ${cls.teacher}</span>` : ""}
                             </div>
                         </div>
                     `;
@@ -117,12 +118,16 @@ async function loadTimetable() {
     } catch (error) {
 
         container.innerHTML = `
-            <div style="text-align:center;padding:40px;background:#fff;border-radius:16px;">
-                <p style="color:var(--red-600);">⚠️ ${error.message || "Could not load timetable."}</p>
+            <div style="text-align:center;padding:40px;background:var(--color-card);border:1px solid var(--color-border);border-radius:16px;">
+                <p style="color:var(--danger);"><i data-lucide="alert-triangle" style="width:16px;height:16px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> ${error.message || "Could not load timetable."}</p>
             </div>`;
         showToast("error", error.message || "Could not load timetable.");
-
+        if (window.lucide) window.lucide.createIcons();
     }
 }
 
-loadTimetable();
+loadTimetable().then(() => {
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+});

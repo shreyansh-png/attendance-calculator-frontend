@@ -1,61 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Timetable</title>
-
     <link rel="stylesheet" href="admin.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
 <nav class="navbar">
-
-    <h2>Upload Timetable</h2>
-
+    <h2><i data-lucide="upload" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px;"></i> Upload Timetable</h2>
     <button onclick="window.location='admin-dashboard.html'">
-
-        Dashboard
-
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Dashboard
     </button>
-
 </nav>
 
 <main class="dashboard">
 
 <div class="login-card">
 
-<h2>
-
-Upload Excel Timetable
-
-</h2>
+<h2>Upload Excel Timetable</h2>
 
 <form id="uploadForm">
 
-<label for="timetable">
-
-Choose Excel File
-
-</label>
-
-<input
-type="file"
-id="timetable"
-accept=".xlsx,.xls"
-required>
+<div>
+    <label for="timetable">Choose Excel File</label>
+    <input type="file" id="timetable" accept=".xlsx,.xls" required>
+</div>
 
 <button type="submit">
-
-Upload
-
+    <i data-lucide="upload-cloud" style="width:14px;height:14px;"></i> Upload
 </button>
 
 </form>
@@ -67,9 +42,9 @@ Upload
 </main>
 
 <script src="../api.js"></script>
-
 <script src="upload-timetable.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="toast.css">
     <link rel="stylesheet" href="dashboard.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
 </head>
 
@@ -18,8 +19,10 @@
 
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="brand">🎓 AttendEase</div>
-        <button id="logoutBtn">🚪 Logout</button>
+        <div class="brand">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <button id="logoutBtn"><i data-lucide="log-out" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> Logout</button>
     </nav>
 
     <!-- Main -->
@@ -38,26 +41,26 @@
 
         <!-- Quick Actions -->
         <section class="actions-section">
-            <h2>Quick Actions</h2>
+            <h2><i data-lucide="zap" style="width:18px;height:18px;"></i> Quick Actions</h2>
             <div class="actions">
 
                 <button id="attendanceBtn" class="action-btn">
-                    <span class="action-icon">📊</span>
+                    <div class="action-icon"><i data-lucide="bar-chart-2"></i></div>
                     <span>Attendance</span>
                 </button>
 
                 <button id="predictionBtn" class="action-btn">
-                    <span class="action-icon">📈</span>
+                    <div class="action-icon"><i data-lucide="trending-up"></i></div>
                     <span>Prediction</span>
                 </button>
 
                 <button id="timetableBtn" class="action-btn">
-                    <span class="action-icon">📅</span>
+                    <div class="action-icon"><i data-lucide="calendar"></i></div>
                     <span>Timetable</span>
                 </button>
 
                 <button id="profileBtn" class="action-btn">
-                    <span class="action-icon">👤</span>
+                    <div class="action-icon"><i data-lucide="user"></i></div>
                     <span>Profile</span>
                 </button>
 
@@ -68,7 +71,7 @@
         <section class="stats">
 
             <div class="stat-card" id="stat-overall">
-                <div class="stat-icon">📊</div>
+                <div class="stat-icon"><i data-lucide="activity"></i></div>
                 <div class="stat-body">
                     <p class="stat-label">Overall Attendance</p>
                     <h2 id="overallAttendance" class="stat-value skeleton skeleton-line short" style="height:36px;width:80px;">--</h2>
@@ -76,7 +79,7 @@
             </div>
 
             <div class="stat-card" id="stat-today">
-                <div class="stat-icon">📅</div>
+                <div class="stat-icon"><i data-lucide="clock"></i></div>
                 <div class="stat-body">
                     <p class="stat-label">Today's Classes</p>
                     <h2 id="todayClassCount" class="stat-value skeleton skeleton-line short" style="height:36px;width:60px;">--</h2>
@@ -89,7 +92,7 @@
         <section class="classes-section">
 
             <div class="section-header">
-                <h2>Today's Schedule</h2>
+                <h2><i data-lucide="list" style="width:18px;height:18px;"></i> Today's Schedule</h2>
             </div>
 
             <div id="todayClasses">
@@ -113,7 +116,9 @@
     <script src="toast.js"></script>
     <script src="api.js"></script>
     <script src="dashboard.js"></script>
-
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 
 </html>

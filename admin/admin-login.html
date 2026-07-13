@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | AttendEase</title>
-
     <link rel="stylesheet" href="admin.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body class="admin-login-page">
 
     <div class="login-card">
+
+        <div style="text-align:center;margin-bottom:24px;color:var(--primary);">
+            <i data-lucide="shield" style="width:48px;height:48px;"></i>
+        </div>
 
         <h1>AttendEase Admin</h1>
 
@@ -24,30 +21,26 @@
 
         <form id="adminLoginForm">
 
-            <label for="adminEmail">
-                Admin Email
-            </label>
+            <div>
+                <label for="adminEmail">Admin Email</label>
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Enter Admin Email"
+                    required>
+            </div>
 
-            <input
-                type="email"
-                id="adminEmail"
-                placeholder="Enter Admin Email"
-                required>
-
-            <label for="adminPassword">
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="adminPassword"
-                placeholder="Enter Password"
-                required>
+            <div>
+                <label for="adminPassword">Password</label>
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter Password"
+                    required>
+            </div>
 
             <button type="submit">
-
-                Login
-
+                <i data-lucide="log-in" style="width:16px;height:16px;"></i> Login
             </button>
 
         </form>
@@ -56,7 +49,8 @@
 
 <script src="../api.js"></script>
 <script src="admin.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

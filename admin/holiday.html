@@ -1,111 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Holiday Management</title>
-
     <link rel="stylesheet" href="admin.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
 <nav class="navbar">
-
-    <h2>Holiday Management</h2>
-
+    <h2><i data-lucide="calendar-off" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px;"></i> Holiday Management</h2>
     <button onclick="window.location='admin-dashboard.html'">
-
-        Dashboard
-
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Dashboard
     </button>
-
 </nav>
 
 <main class="dashboard">
 
 <div class="login-card">
 
-<h2>
-
-Add Holiday
-
-</h2>
+<h2>Add Holiday</h2>
 
 <form id="holidayForm">
 
-<label for="title">
+<div>
+    <label for="title">Holiday Title</label>
+    <input type="text" id="title" required>
+</div>
 
-Holiday Title
+<div>
+    <label for="date">Holiday Date</label>
+    <input type="date" id="date" required>
+</div>
 
-</label>
-
-<input
-type="text"
-id="title"
-required>
-
-<label for="date">
-
-Holiday Date
-
-</label>
-
-<input
-type="date"
-id="date"
-required>
-
-<label for="description">
-
-Description
-
-</label>
-
-<textarea
-id="description"
-rows="4">
-</textarea>
+<div>
+    <label for="description">Description</label>
+    <textarea id="description" rows="4"></textarea>
+</div>
 
 <button type="submit">
-
-Add Holiday
-
+    <i data-lucide="plus" style="width:14px;height:14px;"></i> Add Holiday
 </button>
 
 </form>
 
 </div>
 
-<br>
+<div class="login-card" style="margin-top:24px;">
 
-<div class="login-card">
+<h2>Holiday List</h2>
 
-<h2>
-
-Holiday List
-
-</h2>
-
-<div id="holidayList">
-
-Loading...
-
-</div>
+<div id="holidayList">Loading...</div>
 
 </div>
 
 </main>
 
 <script src="../api.js"></script>
-
 <script src="holiday.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="toast.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .register-grid {
             display: grid;
@@ -38,14 +39,14 @@
 
 <div class="login-card">
 
-    <div class="brand-logo">🎓</div>
+    <div class="brand-logo"><i data-lucide="graduation-cap" style="width:48px;height:48px;"></i></div>
 
     <h2>Create Account</h2>
 
     <p>Join AttendEase and stay on top of your attendance.</p>
 
     <p class="form-hint">
-        💡 Verification Code = Last 2 digits of Roll No. + Branch (e.g. <strong>67ECE</strong>)
+        <i data-lucide="info" style="width:14px;height:14px;display:inline-block;vertical-align:middle;"></i> Verification Code = Last 2 digits of Roll No. + Branch (e.g. <strong>67ECE</strong>)
     </p>
 
     <form id="register-form">
@@ -138,6 +139,9 @@
 <script src="toast.js"></script>
 <script src="api.js"></script>
 <script src="auth.js"></script>
+<script>
+    lucide.createIcons();
+</script>
 
 </body>
 

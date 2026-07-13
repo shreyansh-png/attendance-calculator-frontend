@@ -1,322 +1,380 @@
-body {
+/* ============================================================
+   ADMIN STYLES — Premium Dark Theme
+   ============================================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap');
+
+/* ── Reset & Base ── */
+*, *::before, *::after {
     margin: 0;
-
-    font-family: Poppins, sans-serif;
-
-    background: #f4f7fb;
-
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Admin login centering - only applied by .admin-login-page class */
+:root {
+    --bg: #0b0f14;
+    --surface: #111827;
+    --card: #161b22;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #94a3b8;
+    --primary: #2563eb;
+    --primary-hover: #3b82f6;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --shadow-card: 0 4px 20px rgba(0,0,0,0.25);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+    --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── Admin Login Page ── */
 .admin-login-page {
-
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
-    height: 100vh;
-
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .login-card {
-
-    width: 400px;
-
-    background: white;
-
+    width: 100%;
+    max-width: 420px;
+    background: var(--card);
     padding: 40px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    animation: fadeIn 0.3s ease-out forwards;
+}
 
-    border-radius: 15px;
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
-
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .login-card h1 {
-
     text-align: center;
-
-    color: #2563eb;
-
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .login-card h2 {
-
-    text-align: center;
-
-    margin-bottom: 10px;
-
+    text-align: left;
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 24px;
 }
 
 .login-card p {
-
     text-align: center;
-
-    color: gray;
-
-    margin-bottom: 25px;
-
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-size: 14px;
 }
 
+/* ── Forms ── */
 form {
-
     display: flex;
-
     flex-direction: column;
-
+    gap: 16px;
 }
 
 label {
-
-    margin-top: 15px;
-
-    font-weight: 600;
-
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 6px;
 }
 
-input,
-select,
-textarea {
-
-    padding: 12px;
-
-    margin-top: 8px;
-
-    border: 1px solid #ddd;
-
-    border-radius: 8px;
-
+input, select, textarea {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
     font-size: 14px;
-
+    font-family: inherit;
+    color: var(--text);
+    background: var(--bg);
     width: 100%;
-
     box-sizing: border-box;
-
+    transition: var(--transition);
 }
 
+input::placeholder, textarea::placeholder {
+    color: #4b5563;
+}
+
+input:hover, select:hover, textarea:hover {
+    border-color: var(--border-hover);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+    background: var(--surface);
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ── Buttons ── */
 button {
-
-    margin-top: 25px;
-
-    padding: 12px;
-
-    background: #2563eb;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 8px;
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
     cursor: pointer;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    transition: var(--transition);
+    white-space: nowrap;
+    background: var(--primary);
+    color: #fff;
 }
 
 button:hover {
-
-    background: #1d4ed8;
-
+    background: var(--primary-hover);
+    transform: translateY(-1px);
 }
 
-/* Navbar */
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.3);
+}
+
+/* ── Navbar ── */
 .navbar {
-
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    padding: 15px 30px;
-
-    background: white;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
-
+    padding: 0 32px;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar h2 {
-
-    color: #2563eb;
-
+    color: var(--text);
+    font-family: 'Geist', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
     margin: 0;
-
 }
 
 .navbar button {
-
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    padding: 6px 16px;
+    font-size: 13px;
     margin-top: 0;
-
-    padding: 10px 20px;
-
-    font-size: 14px;
-
 }
 
+.navbar button:hover {
+    color: var(--text);
+    background: var(--card);
+    border-color: var(--border-hover);
+    transform: none;
+}
+
+/* ── Dashboard Layout ── */
 .dashboard {
-
-    width: 90%;
-
+    width: 100%;
     max-width: 1000px;
-
-    margin: 24px auto 50px;
-
+    margin: 32px auto 60px;
+    padding: 0 32px;
 }
 
 .admin-dashboard {
-
     display: flex;
-
     flex-direction: column;
-
-    gap: 20px;
-
+    gap: 24px;
 }
 
 .admin-hero {
-
-    background: white;
-
-    border: 1px solid #e5e7eb;
-
-    border-radius: 8px;
-
-    padding: 22px 26px;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
-
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-card);
 }
 
 .admin-hero h1 {
-
-    margin: 0 0 6px;
-
-    color: #111827;
-
-    font-size: 28px;
-
+    margin: 0 0 8px;
+    text-align: left;
+    color: var(--text);
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .admin-hero p {
-
     margin: 0;
-
-    color: #6b7280;
-
-    font-weight: 600;
-
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 14px;
 }
 
+/* ── Admin Action Grid ── */
 .admin-grid {
-
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 16px;
-
-    margin-top: 0;
-
 }
 
 .admin-grid button {
-
     min-height: 96px;
-
     padding: 24px;
-
-    font-size: 18px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: #2563eb;
-
-    color: white;
-
+    font-size: 16px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    color: var(--text);
     cursor: pointer;
-
-    transition: .3s;
-
+    transition: var(--transition);
+    box-shadow: var(--shadow-card);
     margin-top: 0;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
 .admin-grid button:hover {
-
-    background: #1d4ed8;
-
-    transform: translateY(-3px);
-
+    background: rgba(37, 99, 235, 0.1);
+    border-color: rgba(37, 99, 235, 0.3);
+    color: var(--primary-hover);
+    transform: translateY(-2px);
 }
 
-@media(max-width: 700px) {
-
-    .admin-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-}
-
-
-textarea {
-
-    width: 100%;
-
-    padding: 12px;
-
-    margin-top: 8px;
-
-    border: 1px solid #ddd;
-
-    border-radius: 8px;
-
-    resize: vertical;
-
-}
-
+/* ── Holiday Cards ── */
 .holiday-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-top: 16px;
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
 
-    border: 1px solid #ddd;
-
-    padding: 15px;
-
-    margin-top: 15px;
-
-    border-radius: 10px;
-
+.holiday-card:hover {
+    border-color: var(--border-hover);
 }
 
 .holiday-card h3 {
+    color: var(--text);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
 
-    margin-bottom: 10px;
-
+.holiday-card p {
+    text-align: left;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .holiday-card button {
-
-    margin-top: 10px;
-
-    padding: 8px 16px;
-
+    margin-top: 12px;
+    padding: 6px 14px;
     font-size: 13px;
-
-    background: #dc2626;
-
+    background: var(--danger);
+    border-radius: var(--radius-sm);
 }
 
 .holiday-card button:hover {
+    background: var(--danger-hover);
+}
 
-    background: #b91c1c;
+/* ── Extra / Cancel class cards ── */
+.extra-class-card,
+.cancel-class-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-top: 16px;
+    border-radius: var(--radius-lg);
+    transition: var(--transition);
+}
 
+.extra-class-card:hover,
+.cancel-class-card:hover {
+    border-color: var(--border-hover);
+}
+
+.extra-class-card h3,
+.cancel-class-card h3 {
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.extra-class-card p,
+.cancel-class-card p {
+    text-align: left;
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.extra-class-card button,
+.cancel-class-card button {
+    margin-top: 12px;
+    padding: 6px 14px;
+    font-size: 13px;
+    background: var(--danger);
+}
+
+.extra-class-card button:hover,
+.cancel-class-card button:hover {
+    background: var(--danger-hover);
+}
+
+/* ── Upload message ── */
+#message {
+    margin-top: 16px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+    .admin-grid { grid-template-columns: 1fr; }
+    .dashboard { padding: 0 16px; }
+    .login-card { padding: 32px 24px; }
+    .admin-hero { padding: 24px; }
 }

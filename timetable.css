@@ -1,28 +1,32 @@
 /* ============================================================
-   TIMETABLE PAGE STYLES — AttendEase
+   TIMETABLE PAGE STYLES — Premium Dark Theme
    ============================================================ */
 
 .timetable-page {
-    width: 92%;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 1200px;
     margin: 32px auto 60px;
+    padding: 0 32px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 32px;
 }
 
 .page-header {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .page-header h1 {
-    font-size: 1.6rem;
-    color: var(--gray-800);
-    margin-bottom: 4px;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .page-header p {
-    color: var(--gray-500);
+    color: var(--color-text-secondary);
     font-size: 14px;
 }
 
@@ -30,25 +34,27 @@
 #timetableContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 24px;
 }
 
 .day-card {
-    background: var(--color-surface);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-md);
+    background: var(--color-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
     overflow: hidden;
     border: 1px solid var(--color-border);
     transition: var(--transition);
 }
 
 .day-card:hover {
-    box-shadow: var(--shadow-lg);
+    border-color: var(--color-border-hover);
+    box-shadow: var(--shadow-md);
 }
 
 /* ── Day Header ── */
 .day-header {
-    background: linear-gradient(135deg, var(--blue-800), var(--blue-600));
+    background: var(--gray-800);
+    border-bottom: 1px solid var(--color-border);
     padding: 16px 24px;
     display: flex;
     justify-content: space-between;
@@ -56,106 +62,131 @@
 }
 
 .day-name {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-transform: capitalize;
+    letter-spacing: 0.02em;
 }
 
 .day-vibe {
-    font-size: 12px;
-    color: rgba(255,255,255,0.75);
+    font-size: 13px;
+    color: var(--color-text-muted);
     font-style: italic;
     font-weight: 400;
-    max-width: 280px;
+    max-width: 300px;
     text-align: right;
 }
 
 /* ── Classes inside day card ── */
 .day-classes {
-    padding: 16px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+    background: var(--gray-900);
 }
 
 .class-card {
-    background: var(--gray-50);
+    background: var(--color-card);
     border-radius: var(--radius-md);
-    padding: 16px 18px;
-    border-left: 3px solid var(--blue-500);
+    padding: 16px 20px;
+    border: 1px solid var(--color-border);
+    border-left: 3px solid var(--color-primary);
     transition: var(--transition);
 }
 
 .class-card:hover {
-    background: var(--blue-50);
-    border-left-color: var(--blue-700);
+    background: var(--gray-800);
+    border-color: var(--color-border-hover);
+    border-left-color: var(--blue-500);
     transform: translateX(2px);
 }
 
 .class-card h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--gray-800);
-    margin-bottom: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .class-card .class-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 16px;
     margin-top: 4px;
 }
 
 .class-meta-item {
-    font-size: 12px;
-    color: var(--gray-500);
+    font-size: 13px;
+    color: var(--color-text-secondary);
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+}
+
+.class-meta-item svg {
+    color: var(--color-text-muted);
 }
 
 .class-type-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: 2px 8px;
     border-radius: var(--radius-full);
     font-size: 11px;
     font-weight: 600;
-    background: var(--blue-100);
-    color: var(--blue-700);
-    margin-left: 6px;
+    background: rgba(37, 99, 235, 0.15);
+    color: var(--blue-500);
+    margin-left: 8px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
 .class-type-badge.lab {
-    background: var(--green-100);
-    color: var(--green-700);
+    background: var(--success-bg);
+    color: var(--success);
+    border-color: rgba(34, 197, 94, 0.2);
 }
 
 /* No classes message */
 .no-classes {
     padding: 24px;
     text-align: center;
-    color: var(--gray-400);
+    color: var(--color-text-muted);
     font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.no-classes svg {
+    color: var(--color-primary);
+    width: 32px;
+    height: 32px;
+    opacity: 0.8;
 }
 
 /* Skeleton day */
 .skeleton-day .day-header {
-    background: var(--gray-200);
+    background: var(--gray-800);
     padding: 16px 24px;
 }
 
 .skeleton-card {
-    padding: 16px 18px;
-    background: var(--gray-50);
+    padding: 16px 20px;
+    background: var(--gray-800);
     border-radius: var(--radius-md);
-    border-left: 3px solid var(--gray-300);
+    border-left: 3px solid var(--gray-600);
 }
 
 @media (max-width: 768px) {
-    .timetable-page { width: 95%; }
+    .timetable-page { padding: 0 16px; margin: 24px auto 40px; gap: 24px; }
     .day-vibe       { display: none; }
-    .day-header     { padding: 14px 18px; }
-    .class-card     { padding: 14px; }
+    .day-header     { padding: 16px 20px; }
+    .day-classes    { padding: 16px 20px; }
+    .class-card     { padding: 16px; }
 }

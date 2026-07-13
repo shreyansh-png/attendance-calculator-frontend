@@ -11,20 +11,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="toast.css">
     <link rel="stylesheet" href="timetable.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
 <nav class="navbar">
-    <div class="brand">🎓 AttendEase</div>
-    <button onclick="window.location='dashboard.html'">← Dashboard</button>
+    <div class="brand">
+        <i data-lucide="graduation-cap"></i> AttendEase
+    </div>
+    <button onclick="window.location='dashboard.html'"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard</button>
 </nav>
 
 <main class="timetable-page">
 
     <div class="page-header">
-        <h1>📅 Weekly Timetable</h1>
+        <h1><i data-lucide="calendar-days"></i> Weekly Timetable</h1>
         <p>Your complete weekly class schedule.</p>
     </div>
 
@@ -55,7 +57,9 @@
 <script src="toast.js"></script>
 <script src="api.js"></script>
 <script src="timetable.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
 
 </html>

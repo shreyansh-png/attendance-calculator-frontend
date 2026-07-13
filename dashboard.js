@@ -80,17 +80,17 @@ function renderAttendanceButtons(classId, status) {
     if (isMarked) {
         // Show a badge + locked buttons
         const badge = isPresent
-            ? `<span class="attendance-badge present">✅ Present</span>`
-            : `<span class="attendance-badge absent">❌ Absent</span>`;
+            ? `<span class="attendance-badge present"><i data-lucide="check" style="width:12px;height:12px;"></i> Present</span>`
+            : `<span class="attendance-badge absent"><i data-lucide="x" style="width:12px;height:12px;"></i> Absent</span>`;
 
         return `
             ${badge}
             <div class="attendance-actions">
                 <button class="att-btn ${isPresent ? "selected-present" : "deselected"}" disabled>
-                    ✓ Present
+                    <i data-lucide="check-circle" style="width:16px;height:16px;"></i> Present
                 </button>
                 <button class="att-btn ${isAbsent ? "selected-absent" : "deselected"}" disabled>
-                    ✗ Absent
+                    <i data-lucide="x-circle" style="width:16px;height:16px;"></i> Absent
                 </button>
             </div>
         `;
@@ -103,14 +103,14 @@ function renderAttendanceButtons(classId, status) {
                 class="att-btn"
                 onclick="markClassAttendance('${classId}', 'Present', this)"
             >
-                ✓ Present
+                <i data-lucide="check-circle" style="width:16px;height:16px;"></i> Present
             </button>
             <button
                 id="absent-btn-${classId}"
                 class="att-btn"
                 onclick="markClassAttendance('${classId}', 'Absent', this)"
             >
-                ✗ Absent
+                <i data-lucide="x-circle" style="width:16px;height:16px;"></i> Absent
             </button>
         </div>
     `;
@@ -173,14 +173,19 @@ async function loadTodayClasses() {
             card.className = "class-card";
             card.innerHTML = `
                 <h3>${subjectName}</h3>
-                <p>🕐 ${cls.startTime} – ${cls.endTime}</p>
-                <p>📍 Room: ${cls.room || "N/A"}</p>
-                ${cls.teacher ? `<p>👨‍🏫 ${cls.teacher}</p>` : ""}
+                <p><i data-lucide="clock" style="width:14px;height:14px;"></i> ${cls.startTime} – ${cls.endTime}</p>
+                <p><i data-lucide="map-pin" style="width:14px;height:14px;"></i> Room: ${cls.room || "N/A"}</p>
+                ${cls.teacher ? `<p><i data-lucide="user" style="width:14px;height:14px;"></i> ${cls.teacher}</p>` : ""}
                 ${renderAttendanceButtons(cls._id, attendanceStatus)}
             `;
 
             container.appendChild(card);
         });
+
+        // Initialize newly added lucide icons
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
 
     } catch (error) {
         // Remove skeleton

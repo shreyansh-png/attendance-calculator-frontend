@@ -1,308 +1,337 @@
 /* ============================================================
-   DASHBOARD PAGE STYLES — AttendEase
+   DASHBOARD PAGE STYLES — Premium Dark Theme
    ============================================================ */
 
 .dashboard {
-    width: 92%;
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1200px;
     margin: 32px auto 60px;
+    padding: 0 32px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 32px;
 }
 
 /* ── Welcome Card ── */
 .welcome-card {
-    background: linear-gradient(135deg, var(--blue-800) 0%, var(--blue-600) 100%);
-    padding: 32px 36px;
-    border-radius: var(--radius-xl);
-    color: #fff;
+    background: var(--color-card);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 8px 28px rgba(30, 64, 175, 0.3);
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
 }
 
 .welcome-card::after {
-    content: '🎓';
+    /* We can use an icon in HTML or a subtle gradient here instead of an emoji */
+    content: '';
     position: absolute;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 5rem;
-    opacity: 0.1;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: radial-gradient(circle at 100% 50%, rgba(37, 99, 235, 0.1), transparent);
+    pointer-events: none;
 }
 
 .welcome-card h1 {
-    font-size: 1.6rem;
-    font-weight: 800;
-    color: #fff;
-    margin-bottom: 6px;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 8px;
 }
 
 .welcome-card p,
 .welcome-card #studentName {
-    color: rgba(255,255,255,0.75);
-    font-size: 15px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
     font-weight: 500;
-    background: none !important;
-    animation: none !important;
-    width: auto !important;
-    height: auto !important;
 }
 
 .welcome-date {
     font-size: 13px;
-    color: rgba(255,255,255,0.65);
+    color: var(--color-text-secondary);
     font-weight: 500;
-    background: rgba(255,255,255,0.12);
-    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border);
+    padding: 8px 12px;
     border-radius: var(--radius-md);
     white-space: nowrap;
+    z-index: 1;
+}
+
+/* ── Quick Actions ── */
+.actions-section h2, .section-header h2 {
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.action-btn {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--color-text);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+.action-btn .action-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-primary);
+}
+
+.action-btn .action-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.action-btn:hover {
+    background: var(--gray-600);
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* ── Stat Cards ── */
 .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 16px;
 }
 
 .stat-card {
-    background: var(--color-surface);
-    padding: 24px 28px;
+    background: var(--color-card);
+    padding: 24px;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
-    gap: 20px;
-    border: 1px solid rgba(0,0,0,0.04);
+    gap: 16px;
     transition: var(--transition);
+    box-shadow: var(--shadow-sm);
 }
 
 .stat-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    border-color: var(--color-border-hover);
 }
 
 .stat-icon {
-    font-size: 2.2rem;
-    background: var(--blue-50);
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--color-primary);
     border-radius: var(--radius-md);
-    width: 56px;
-    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
+.stat-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.stat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .stat-label {
     font-size: 12px;
-    font-weight: 600;
-    color: var(--gray-400);
+    font-weight: 500;
+    color: var(--color-text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
+    letter-spacing: 0.05em;
 }
 
 .stat-value {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--blue-700);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
     line-height: 1;
-    background: none !important;
-    animation: none !important;
-    width: auto !important;
-    height: auto !important;
+    font-family: 'Geist', sans-serif;
 }
 
 /* ── Classes Section ── */
-.classes-section { }
-
-.section-header {
+.classes-section {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.section-header h2 {
-    font-size: 1.1rem;
-    color: var(--gray-700);
-    font-weight: 700;
+    flex-direction: column;
 }
 
 #todayClasses {
     display: grid;
-    gap: 14px;
+    gap: 16px;
 }
 
 .class-card {
-    background: var(--color-surface);
-    padding: 20px 24px;
+    background: var(--color-card);
+    padding: 24px;
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    border-left: 4px solid var(--blue-500);
     border: 1px solid var(--color-border);
-    border-left: 4px solid var(--blue-500);
+    border-left: 3px solid var(--color-primary);
     transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .class-card:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-hover);
+    border-left-color: var(--blue-500);
 }
 
 .class-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--gray-800);
-    margin-bottom: 6px;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 4px;
 }
 
 .class-card p {
     font-size: 13px;
-    color: var(--gray-500);
-    margin-bottom: 4px;
-    line-height: 1.4;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.class-card p svg {
+    width: 14px;
+    height: 14px;
+    color: var(--color-text-muted);
 }
 
 /* Skeleton card */
 .skeleton-card {
-    padding: 20px 24px;
-    background: var(--color-surface);
-    border-radius: var(--radius-lg);
-    border: 1px solid var(--color-border);
-    border-left: 4px solid var(--gray-200);
+    border-left-color: var(--gray-600);
 }
 
 /* ── Attendance Buttons ── */
-.attendance-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
+.attendance-actions-wrapper {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-border);
 }
 
-/* Present button */
+.attendance-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* Action button */
 .att-btn {
     flex: 1;
-    padding: 9px 12px;
+    padding: 8px 12px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: var(--radius-md);
     cursor: pointer;
-    border: 1.5px solid var(--gray-300);
+    border: 1px solid var(--color-border);
     background: var(--color-surface);
-    color: var(--gray-600);
-    transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    color: var(--color-text-secondary);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.att-btn svg {
+    width: 16px;
+    height: 16px;
 }
 
 .att-btn:hover:not(:disabled) {
-    border-color: var(--blue-500);
-    color: var(--blue-700);
-    background: var(--blue-50);
-    transform: translateY(-1px);
+    border-color: var(--color-border-hover);
+    color: var(--color-text);
+    background: var(--gray-600);
 }
 
-/* Selected state — dark blue */
-.att-btn.selected-present,
-.att-btn.selected-absent {
-    background: var(--blue-800) !important;
-    color: #fff !important;
-    border-color: var(--blue-800) !important;
-    font-weight: 700;
-    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.35);
+/* Selected state */
+.att-btn.selected-present {
+    background: var(--success-bg) !important;
+    color: var(--success) !important;
+    border-color: rgba(34, 197, 94, 0.3) !important;
     cursor: default;
-    transform: none;
 }
 
-/* Unselected (other button when one is marked) */
+.att-btn.selected-absent {
+    background: var(--danger-bg) !important;
+    color: var(--danger) !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+    cursor: default;
+}
+
+/* Unselected state */
 .att-btn.deselected {
-    background: #fff;
+    background: transparent;
     color: var(--gray-500);
-    border-color: var(--gray-300);
-    opacity: 0.6;
+    border-color: transparent;
     cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* Marked badge */
 .attendance-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
+    gap: 6px;
+    padding: 4px 12px;
     border-radius: var(--radius-full);
     font-size: 12px;
-    font-weight: 600;
-    margin-top: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    border: 1px solid transparent;
 }
 
 .attendance-badge.present {
-    background: var(--green-100);
-    color: var(--green-700);
+    background: var(--success-bg);
+    color: var(--success);
+    border-color: rgba(34, 197, 94, 0.2);
 }
 
 .attendance-badge.absent {
-    background: var(--red-100);
-    color: var(--red-600);
-}
-
-/* ── Quick Actions ── */
-.actions-section h2 {
-    font-size: 1.1rem;
-    color: var(--gray-700);
-    font-weight: 700;
-    margin-bottom: 16px;
-}
-
-.actions {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-}
-
-.action-btn {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 22px 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: var(--shadow-sm);
-    color: var(--gray-700);
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.action-btn .action-icon {
-    font-size: 1.8rem;
-}
-
-.action-btn:hover {
-    background: var(--blue-50);
-    border-color: var(--blue-200);
-    color: var(--blue-700);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.2);
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-    .dashboard { width: 95%; margin: 20px auto 40px; gap: 20px; }
+    .dashboard { padding: 0 16px; margin: 24px auto 40px; gap: 24px; }
     .stats { grid-template-columns: 1fr; }
     .actions { grid-template-columns: repeat(2, 1fr); }
-    .welcome-card { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .welcome-card::after { right: 16px; font-size: 3rem; }
+    .welcome-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 24px; }
 }
 
 @media (max-width: 480px) {
-    .actions { grid-template-columns: repeat(2, 1fr); }
-    .welcome-card { padding: 24px; }
-    .stat-card { padding: 18px 20px; }
+    .actions { grid-template-columns: 1fr; }
+    .stat-card { padding: 20px; }
+    .class-card { padding: 20px; }
 }

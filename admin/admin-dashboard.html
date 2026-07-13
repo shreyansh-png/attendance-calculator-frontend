@@ -1,67 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | AttendEase</title>
-
     <link rel="stylesheet" href="admin.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-
 <body>
 
 <nav class="navbar">
-
-    <h2>AttendEase Admin</h2>
-
+    <h2><i data-lucide="shield" style="width:18px;height:18px;display:inline-block;vertical-align:middle;margin-right:8px;color:var(--primary);"></i> AttendEase Admin</h2>
     <button id="logoutBtn">
-
-        Logout
-
+        <i data-lucide="log-out" style="width:14px;height:14px;"></i> Logout
     </button>
-
 </nav>
 
 <main class="dashboard admin-dashboard">
 
 <section class="admin-hero">
-
     <h1>Welcome Admin</h1>
-
     <p>Quick Actions</p>
-
 </section>
 
 <div class="admin-grid" aria-label="Admin quick actions">
 
 <button id="uploadBtn">
-
-Upload Timetable
-
+    <i data-lucide="upload" style="width:24px;height:24px;"></i>
+    Upload Timetable
 </button>
 
 <button id="holidayBtn">
-
-Manage Holidays
-
+    <i data-lucide="calendar-off" style="width:24px;height:24px;"></i>
+    Manage Holidays
 </button>
 
 <button id="extraBtn">
-
-Extra Classes
-
+    <i data-lucide="plus-circle" style="width:24px;height:24px;"></i>
+    Extra Classes
 </button>
 
 <button id="cancelBtn">
-
-Cancel Classes
-
+    <i data-lucide="x-circle" style="width:24px;height:24px;"></i>
+    Cancel Classes
 </button>
 
 </div>
@@ -69,9 +50,9 @@ Cancel Classes
 </main>
 
 <script src="../api.js"></script>
-
 <script src="admin-dashboard.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
-
 </html>

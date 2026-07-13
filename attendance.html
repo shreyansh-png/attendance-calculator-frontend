@@ -11,20 +11,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="toast.css">
     <link rel="stylesheet" href="attendance.css">
-
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
 <nav class="navbar">
-    <div class="brand">🎓 AttendEase</div>
-    <button onclick="window.location='dashboard.html'">← Dashboard</button>
+    <div class="brand">
+        <i data-lucide="graduation-cap"></i> AttendEase
+    </div>
+    <button onclick="window.location='dashboard.html'"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard</button>
 </nav>
 
 <main class="attendance-page">
 
     <div class="page-header">
-        <h1>📊 Attendance Report</h1>
+        <h1><i data-lucide="bar-chart-2"></i> Attendance Report</h1>
         <p>Your subject-wise and overall attendance summary.</p>
     </div>
 
@@ -33,7 +35,7 @@
             <p class="overall-label">Overall Attendance</p>
             <h1 id="overallAttendance" class="skeleton skeleton-line short" style="height:48px;width:100px;">--</h1>
         </div>
-        <div class="overall-icon">📊</div>
+        <div class="overall-icon"><i data-lucide="pie-chart"></i></div>
     </div>
 
     <div class="table-wrapper">
@@ -80,7 +82,9 @@
 <script src="toast.js"></script>
 <script src="api.js"></script>
 <script src="attendance.js"></script>
-
+<script>
+    lucide.createIcons();
+</script>
 </body>
 
 </html>
