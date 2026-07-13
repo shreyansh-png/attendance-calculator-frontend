@@ -10,74 +10,111 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <div class="brand">
-        <i data-lucide="graduation-cap"></i> AttendEase
+<div class="app-layout">
+    <!-- Mobile Nav (Top) -->
+    <div class="auth-mobile-nav">
+        <div class="brand">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <button class="mobile-nav-toggle" onclick="document.getElementById('sidebar').classList.add('open'); document.getElementById('mobileOverlay').classList.add('active');">
+            <i data-lucide="menu"></i>
+        </button>
     </div>
-    <button onclick="window.location='dashboard.html'">
-        <i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard
-    </button>
-</nav>
 
-<main class="profile-page">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <i data-lucide="layout-dashboard"></i> Dashboard
+            </a>
+            <a href="attendance.html" class="sidebar-link">
+                <i data-lucide="bar-chart-2"></i> Attendance
+            </a>
+            <a href="timetable.html" class="sidebar-link">
+                <i data-lucide="calendar"></i> Timetable
+            </a>
+            <a href="prediction.html" class="sidebar-link">
+                <i data-lucide="trending-up"></i> Prediction
+            </a>
+            <a href="profile.html" class="sidebar-link active">
+                <i data-lucide="user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="sidebar-link" style="width:100%; border:none; background:transparent; cursor:pointer; font-family:inherit;" onclick="localStorage.clear(); window.location.href='login.html';">
+                <i data-lucide="log-out"></i> Logout
+            </button>
+        </div>
+    </aside>
 
-<div class="profile-card">
+    <div class="mobile-overlay" id="mobileOverlay" onclick="document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobileOverlay').classList.remove('active');"></div>
 
-<h1>
-    <i data-lucide="user-circle" style="width:28px;height:28px;"></i>
-    My Profile
-</h1>
+    <!-- Main Content -->
+    <div class="main-content">
+        <main class="profile-page" style="margin-top: 32px;">
 
-<div class="profile-row">
-    <label>Full Name</label>
-    <p id="fullName">Loading...</p>
+        <div class="profile-card">
+
+        <h1>
+            <i data-lucide="user-circle" style="width:28px;height:28px;"></i>
+            My Profile
+        </h1>
+
+        <div class="profile-row">
+            <label>Full Name</label>
+            <p id="fullName">Loading...</p>
+        </div>
+
+        <div class="profile-row">
+            <label>Email</label>
+            <p id="email"></p>
+        </div>
+
+        <div class="profile-row">
+            <label>Roll Number</label>
+            <p id="rollNumber"></p>
+        </div>
+
+        <div class="profile-row">
+            <label>Branch</label>
+            <p id="branch"></p>
+        </div>
+
+        <div class="profile-row">
+            <label>Semester</label>
+            <p id="semester"></p>
+        </div>
+
+        <div class="profile-row">
+            <label>Section</label>
+            <p id="section"></p>
+        </div>
+
+        <div class="profile-row">
+            <label>Passing Year</label>
+            <p id="academicYear"></p>
+        </div>
+
+        <div class="buttons">
+            <button id="editBtn">
+                <i data-lucide="pencil" style="width:14px;height:14px;"></i> Edit Profile
+            </button>
+            <button id="saveBtn" style="display:none;">
+                <i data-lucide="save" style="width:14px;height:14px;"></i> Save Changes
+            </button>
+            <button id="changePasswordBtn" class="btn-secondary">
+                <i data-lucide="lock" style="width:14px;height:14px;"></i> Change Password
+            </button>
+        </div>
+
+        </div>
+
+        </main>
+    </div>
 </div>
-
-<div class="profile-row">
-    <label>Email</label>
-    <p id="email"></p>
-</div>
-
-<div class="profile-row">
-    <label>Roll Number</label>
-    <p id="rollNumber"></p>
-</div>
-
-<div class="profile-row">
-    <label>Branch</label>
-    <p id="branch"></p>
-</div>
-
-<div class="profile-row">
-    <label>Semester</label>
-    <p id="semester"></p>
-</div>
-
-<div class="profile-row">
-    <label>Section</label>
-    <p id="section"></p>
-</div>
-
-<div class="profile-row">
-    <label>Passing Year</label>
-    <p id="academicYear"></p>
-</div>
-
-<div class="buttons">
-    <button id="editBtn">
-        <i data-lucide="pencil" style="width:14px;height:14px;"></i> Edit Profile
-    </button>
-    <button id="saveBtn" style="display:none;">
-        <i data-lucide="save" style="width:14px;height:14px;"></i> Save Changes
-    </button>
-    <button id="changePasswordBtn" class="btn-secondary">
-        <i data-lucide="lock" style="width:14px;height:14px;"></i> Change Password
-    </button>
-</div>
-
-</div>
-
-</main>
 
 <script src="api.js"></script>
 <script src="profile.js"></script>

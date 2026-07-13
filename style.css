@@ -274,6 +274,137 @@ button:disabled, .btn:disabled {
     border-color: var(--color-border-hover);
 }
 
+/* ── App Layout (Sidebar + Main) ── */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    width: 260px;
+    background: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 200;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--color-border);
+    font-family: 'Geist', sans-serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    gap: 12px;
+}
+
+.sidebar-header svg {
+    color: var(--color-primary);
+}
+
+.sidebar-nav {
+    flex: 1;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.sidebar-link svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-text-muted);
+    transition: var(--transition);
+}
+
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text);
+}
+
+.sidebar-link:hover svg {
+    color: var(--color-text);
+}
+
+.sidebar-link.active {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.sidebar-link.active svg {
+    color: #fff;
+}
+
+.sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--color-border);
+}
+
+.sidebar-footer .sidebar-link {
+    color: var(--danger);
+}
+.sidebar-footer .sidebar-link svg {
+    color: var(--danger);
+}
+.sidebar-footer .sidebar-link:hover {
+    background: var(--danger-bg);
+}
+
+/* Main Content Area */
+.main-content {
+    flex: 1;
+    margin-left: 260px; /* Width of sidebar */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Mobile Sidebar Toggle */
+.mobile-nav-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 8px;
+}
+
+.mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 150;
+}
+
 /* ── Generic Cards ── */
 .card {
     background: var(--color-card);
@@ -509,4 +640,45 @@ footer {
     .features { grid-template-columns: 1fr; }
     .buttons { flex-direction: column; }
     .navbar { padding: 0 20px; }
+
+    /* Sidebar Mobile Layout */
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    .main-content {
+        margin-left: 0;
+    }
+    .mobile-nav-toggle {
+        display: block;
+    }
+    .mobile-overlay.active {
+        display: block;
+    }
+    
+    /* Top navbar for authenticated mobile view when sidebar is closed */
+    .auth-mobile-nav {
+        display: flex;
+        height: 64px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    
+    .auth-mobile-nav .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Geist', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--color-text);
+    }
 }

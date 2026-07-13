@@ -16,68 +16,107 @@
 
 <body>
 
-<nav class="navbar">
-    <div class="brand">
-        <i data-lucide="graduation-cap"></i> AttendEase
-    </div>
-    <button onclick="window.location='dashboard.html'"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard</button>
-</nav>
-
-<main class="attendance-page">
-
-    <div class="page-header">
-        <h1><i data-lucide="bar-chart-2"></i> Attendance Report</h1>
-        <p>Your subject-wise and overall attendance summary.</p>
-    </div>
-
-    <div id="overallCard" class="overall-card">
-        <div class="overall-info">
-            <p class="overall-label">Overall Attendance</p>
-            <h1 id="overallAttendance" class="skeleton skeleton-line short" style="height:48px;width:100px;">--</h1>
+<div class="app-layout">
+    <!-- Mobile Nav (Top) -->
+    <div class="auth-mobile-nav">
+        <div class="brand">
+            <i data-lucide="graduation-cap"></i> AttendEase
         </div>
-        <div class="overall-icon"><i data-lucide="pie-chart"></i></div>
+        <button class="mobile-nav-toggle" onclick="document.getElementById('sidebar').classList.add('open'); document.getElementById('mobileOverlay').classList.add('active');">
+            <i data-lucide="menu"></i>
+        </button>
     </div>
 
-    <div class="table-wrapper">
-        <h2>Subject-wise Breakdown</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Present</th>
-                    <th>Absent</th>
-                    <th>Total</th>
-                    <th>Percentage</th>
-                </tr>
-            </thead>
-            <tbody id="attendanceTable">
-                <!-- Skeleton rows -->
-                <tr class="skeleton-row">
-                    <td><div class="skeleton skeleton-line medium"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                </tr>
-                <tr class="skeleton-row">
-                    <td><div class="skeleton skeleton-line medium"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                </tr>
-                <tr class="skeleton-row">
-                    <td><div class="skeleton skeleton-line full"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                    <td><div class="skeleton skeleton-line short"></div></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <i data-lucide="layout-dashboard"></i> Dashboard
+            </a>
+            <a href="attendance.html" class="sidebar-link active">
+                <i data-lucide="bar-chart-2"></i> Attendance
+            </a>
+            <a href="timetable.html" class="sidebar-link">
+                <i data-lucide="calendar"></i> Timetable
+            </a>
+            <a href="prediction.html" class="sidebar-link">
+                <i data-lucide="trending-up"></i> Prediction
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <i data-lucide="user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="sidebar-link" style="width:100%; border:none; background:transparent; cursor:pointer; font-family:inherit;" onclick="localStorage.clear(); window.location.href='login.html';">
+                <i data-lucide="log-out"></i> Logout
+            </button>
+        </div>
+    </aside>
 
-</main>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobileOverlay').classList.remove('active');"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <main class="attendance-page" style="margin-top: 32px;">
+
+            <div class="page-header">
+                <h1><i data-lucide="bar-chart-2"></i> Attendance Report</h1>
+                <p>Your subject-wise and overall attendance summary.</p>
+            </div>
+
+            <div id="overallCard" class="overall-card">
+                <div class="overall-info">
+                    <p class="overall-label">Overall Attendance</p>
+                    <h1 id="overallAttendance" class="skeleton skeleton-line short" style="height:48px;width:100px;">--</h1>
+                </div>
+                <div class="overall-icon"><i data-lucide="pie-chart"></i></div>
+            </div>
+
+            <div class="table-wrapper">
+                <h2>Subject-wise Breakdown</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Present</th>
+                            <th>Absent</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceTable">
+                        <!-- Skeleton rows -->
+                        <tr class="skeleton-row">
+                            <td><div class="skeleton skeleton-line medium"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                        </tr>
+                        <tr class="skeleton-row">
+                            <td><div class="skeleton skeleton-line medium"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                        </tr>
+                        <tr class="skeleton-row">
+                            <td><div class="skeleton skeleton-line full"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                            <td><div class="skeleton skeleton-line short"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+</div>
 
 <script src="toast.js"></script>
 <script src="api.js"></script>

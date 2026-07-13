@@ -16,43 +16,82 @@
 
 <body>
 
-<nav class="navbar">
-    <div class="brand">
-        <i data-lucide="graduation-cap"></i> AttendEase
-    </div>
-    <button onclick="window.location='dashboard.html'"><i data-lucide="arrow-left" style="width:14px;height:14px;margin-right:4px;"></i> Dashboard</button>
-</nav>
-
-<main class="timetable-page">
-
-    <div class="page-header">
-        <h1><i data-lucide="calendar-days"></i> Weekly Timetable</h1>
-        <p>Your complete weekly class schedule.</p>
-    </div>
-
-    <div id="timetableContainer">
-        <!-- Skeleton -->
-        <div class="day-card skeleton-day">
-            <div class="day-header">
-                <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
-            </div>
-            <div class="class-card skeleton-card" style="margin-top:12px;">
-                <div class="skeleton skeleton-title"></div>
-                <div class="skeleton skeleton-line medium"></div>
-            </div>
+<div class="app-layout">
+    <!-- Mobile Nav (Top) -->
+    <div class="auth-mobile-nav">
+        <div class="brand">
+            <i data-lucide="graduation-cap"></i> AttendEase
         </div>
-        <div class="day-card skeleton-day">
-            <div class="day-header">
-                <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
-            </div>
-            <div class="class-card skeleton-card" style="margin-top:12px;">
-                <div class="skeleton skeleton-title"></div>
-                <div class="skeleton skeleton-line medium"></div>
-            </div>
-        </div>
+        <button class="mobile-nav-toggle" onclick="document.getElementById('sidebar').classList.add('open'); document.getElementById('mobileOverlay').classList.add('active');">
+            <i data-lucide="menu"></i>
+        </button>
     </div>
 
-</main>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link">
+                <i data-lucide="layout-dashboard"></i> Dashboard
+            </a>
+            <a href="attendance.html" class="sidebar-link">
+                <i data-lucide="bar-chart-2"></i> Attendance
+            </a>
+            <a href="timetable.html" class="sidebar-link active">
+                <i data-lucide="calendar"></i> Timetable
+            </a>
+            <a href="prediction.html" class="sidebar-link">
+                <i data-lucide="trending-up"></i> Prediction
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <i data-lucide="user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="sidebar-link" style="width:100%; border:none; background:transparent; cursor:pointer; font-family:inherit;" onclick="localStorage.clear(); window.location.href='login.html';">
+                <i data-lucide="log-out"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <div class="mobile-overlay" id="mobileOverlay" onclick="document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobileOverlay').classList.remove('active');"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <main class="timetable-page" style="margin-top: 32px;">
+
+            <div class="page-header">
+                <h1><i data-lucide="calendar-days"></i> Weekly Timetable</h1>
+                <p>Your complete weekly class schedule.</p>
+            </div>
+
+            <div id="timetableContainer">
+                <!-- Skeleton -->
+                <div class="day-card skeleton-day">
+                    <div class="day-header">
+                        <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
+                    </div>
+                    <div class="class-card skeleton-card" style="margin-top:12px;">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                    </div>
+                </div>
+                <div class="day-card skeleton-day">
+                    <div class="day-header">
+                        <div class="skeleton skeleton-line short" style="height:20px;width:120px;"></div>
+                    </div>
+                    <div class="class-card skeleton-card" style="margin-top:12px;">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
 
 <script src="toast.js"></script>
 <script src="api.js"></script>

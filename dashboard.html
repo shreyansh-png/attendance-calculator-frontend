@@ -17,101 +17,138 @@
 
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
+<div class="app-layout">
+    <!-- Mobile Nav (Top) -->
+    <div class="auth-mobile-nav">
         <div class="brand">
             <i data-lucide="graduation-cap"></i> AttendEase
         </div>
-        <button id="logoutBtn"><i data-lucide="log-out" style="width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:4px;"></i> Logout</button>
-    </nav>
+        <button class="mobile-nav-toggle" onclick="document.getElementById('sidebar').classList.add('open'); document.getElementById('mobileOverlay').classList.add('active');">
+            <i data-lucide="menu"></i>
+        </button>
+    </div>
 
-    <!-- Main -->
-    <main class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <i data-lucide="graduation-cap"></i> AttendEase
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-link active">
+                <i data-lucide="layout-dashboard"></i> Dashboard
+            </a>
+            <a href="attendance.html" class="sidebar-link">
+                <i data-lucide="bar-chart-2"></i> Attendance
+            </a>
+            <a href="timetable.html" class="sidebar-link">
+                <i data-lucide="calendar"></i> Timetable
+            </a>
+            <a href="prediction.html" class="sidebar-link">
+                <i data-lucide="trending-up"></i> Prediction
+            </a>
+            <a href="profile.html" class="sidebar-link">
+                <i data-lucide="user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="sidebar-link" style="width:100%; border:none; background:transparent; cursor:pointer; font-family:inherit;">
+                <i data-lucide="log-out"></i> Logout
+            </button>
+        </div>
+    </aside>
 
-        <!-- Welcome Card -->
-        <section class="welcome-card">
-            <div class="welcome-text">
-                <h1 id="greeting">Good Morning 👋</h1>
-                <p id="studentName" class="skeleton skeleton-line medium" style="height:20px;width:200px;"></p>
-            </div>
-            <div class="welcome-date">
-                <span id="currentDate"></span>
-            </div>
-        </section>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="document.getElementById('sidebar').classList.remove('open'); document.getElementById('mobileOverlay').classList.remove('active');"></div>
 
-        <!-- Quick Actions -->
-        <section class="actions-section">
-            <h2><i data-lucide="zap" style="width:18px;height:18px;"></i> Quick Actions</h2>
-            <div class="actions">
+    <!-- Main Content -->
+    <div class="main-content">
+        <main class="dashboard" style="margin-top: 32px;">
 
-                <button id="attendanceBtn" class="action-btn">
-                    <div class="action-icon"><i data-lucide="bar-chart-2"></i></div>
-                    <span>Attendance</span>
-                </button>
-
-                <button id="predictionBtn" class="action-btn">
-                    <div class="action-icon"><i data-lucide="trending-up"></i></div>
-                    <span>Prediction</span>
-                </button>
-
-                <button id="timetableBtn" class="action-btn">
-                    <div class="action-icon"><i data-lucide="calendar"></i></div>
-                    <span>Timetable</span>
-                </button>
-
-                <button id="profileBtn" class="action-btn">
-                    <div class="action-icon"><i data-lucide="user"></i></div>
-                    <span>Profile</span>
-                </button>
-
-            </div>
-        </section>
-
-        <!-- Stats -->
-        <section class="stats">
-
-            <div class="stat-card" id="stat-overall">
-                <div class="stat-icon"><i data-lucide="activity"></i></div>
-                <div class="stat-body">
-                    <p class="stat-label">Overall Attendance</p>
-                    <h2 id="overallAttendance" class="stat-value skeleton skeleton-line short" style="height:36px;width:80px;">--</h2>
+            <!-- Welcome Card -->
+            <section class="welcome-card">
+                <div class="welcome-text">
+                    <h1 id="greeting">Good Morning 👋</h1>
+                    <p id="studentName" class="skeleton skeleton-line medium" style="height:20px;width:200px;"></p>
                 </div>
-            </div>
-
-            <div class="stat-card" id="stat-today">
-                <div class="stat-icon"><i data-lucide="clock"></i></div>
-                <div class="stat-body">
-                    <p class="stat-label">Today's Classes</p>
-                    <h2 id="todayClassCount" class="stat-value skeleton skeleton-line short" style="height:36px;width:60px;">--</h2>
+                <div class="welcome-date">
+                    <span id="currentDate"></span>
                 </div>
-            </div>
+            </section>
 
-        </section>
+            <!-- Quick Actions -->
+            <section class="actions-section">
+                <h2><i data-lucide="zap" style="width:18px;height:18px;"></i> Quick Actions</h2>
+                <div class="actions">
 
-        <!-- Today's Classes -->
-        <section class="classes-section">
+                    <button id="attendanceBtn" class="action-btn">
+                        <div class="action-icon"><i data-lucide="bar-chart-2"></i></div>
+                        <span>Attendance</span>
+                    </button>
 
-            <div class="section-header">
-                <h2><i data-lucide="list" style="width:18px;height:18px;"></i> Today's Schedule</h2>
-            </div>
+                    <button id="predictionBtn" class="action-btn">
+                        <div class="action-icon"><i data-lucide="trending-up"></i></div>
+                        <span>Prediction</span>
+                    </button>
 
-            <div id="todayClasses">
-                <!-- Skeleton loaders -->
-                <div class="class-card skeleton-card">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-line medium"></div>
-                    <div class="skeleton skeleton-line short"></div>
+                    <button id="timetableBtn" class="action-btn">
+                        <div class="action-icon"><i data-lucide="calendar"></i></div>
+                        <span>Timetable</span>
+                    </button>
+
+                    <button id="profileBtn" class="action-btn">
+                        <div class="action-icon"><i data-lucide="user"></i></div>
+                        <span>Profile</span>
+                    </button>
+
                 </div>
-                <div class="class-card skeleton-card">
-                    <div class="skeleton skeleton-title"></div>
-                    <div class="skeleton skeleton-line medium"></div>
-                    <div class="skeleton skeleton-line short"></div>
+            </section>
+
+            <!-- Stats -->
+            <section class="stats">
+
+                <div class="stat-card" id="stat-overall">
+                    <div class="stat-icon"><i data-lucide="activity"></i></div>
+                    <div class="stat-body">
+                        <p class="stat-label">Overall Attendance</p>
+                        <h2 id="overallAttendance" class="stat-value skeleton skeleton-line short" style="height:36px;width:80px;">--</h2>
+                    </div>
                 </div>
-            </div>
 
-        </section>
+                <div class="stat-card" id="stat-today">
+                    <div class="stat-icon"><i data-lucide="clock"></i></div>
+                    <div class="stat-body">
+                        <p class="stat-label">Today's Classes</p>
+                        <h2 id="todayClassCount" class="stat-value skeleton skeleton-line short" style="height:36px;width:60px;">--</h2>
+                    </div>
+                </div>
 
-    </main>
+            </section>
+
+            <!-- Today's Classes -->
+            <section class="classes-section">
+
+                <div class="section-header">
+                    <h2><i data-lucide="list" style="width:18px;height:18px;"></i> Today's Schedule</h2>
+                </div>
+
+                <div id="todayClasses">
+                    <!-- Skeleton loaders -->
+                    <div class="class-card skeleton-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                        <div class="skeleton skeleton-line short"></div>
+                    </div>
+                    <div class="class-card skeleton-card">
+                        <div class="skeleton skeleton-title"></div>
+                        <div class="skeleton skeleton-line medium"></div>
+                        <div class="skeleton skeleton-line short"></div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+</div>
 
     <script src="toast.js"></script>
     <script src="api.js"></script>

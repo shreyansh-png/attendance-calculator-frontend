@@ -78,22 +78,9 @@ function renderAttendanceButtons(classId, status) {
     const isMarked  = isPresent || isAbsent;
 
     if (isMarked) {
-        // Show a badge + locked buttons
-        const badge = isPresent
-            ? `<span class="attendance-badge present"><i data-lucide="check" style="width:12px;height:12px;"></i> Present</span>`
-            : `<span class="attendance-badge absent"><i data-lucide="x" style="width:12px;height:12px;"></i> Absent</span>`;
-
-        return `
-            ${badge}
-            <div class="attendance-actions">
-                <button class="att-btn ${isPresent ? "selected-present" : "deselected"}" disabled>
-                    <i data-lucide="check-circle" style="width:16px;height:16px;"></i> Present
-                </button>
-                <button class="att-btn ${isAbsent ? "selected-absent" : "deselected"}" disabled>
-                    <i data-lucide="x-circle" style="width:16px;height:16px;"></i> Absent
-                </button>
-            </div>
-        `;
+        return isPresent
+            ? `<div style="margin-top:12px;"><span class="badge badge-success"><i data-lucide="check" style="width:14px;height:14px;"></i> Present</span></div>`
+            : `<div style="margin-top:12px;"><span class="badge badge-danger"><i data-lucide="x" style="width:14px;height:14px;"></i> Absent</span></div>`;
     }
 
     return `
@@ -218,6 +205,9 @@ async function markClassAttendance(classId, status, clickedBtn) {
 
         // Re-render the card's action area
         actionsDiv.outerHTML = renderAttendanceButtons(classId, status);
+        if (window.lucide) {
+            window.lucide.createIcons();
+        }
         showToast("success", `Marked as ${status} — attendance saved! 📝`);
 
     } catch (error) {
