@@ -75,40 +75,32 @@
                 <div class="overall-icon"><i data-lucide="pie-chart"></i></div>
             </div>
 
-            <div class="table-wrapper">
-                <h2>Subject-wise Breakdown</h2>
-                <table>
-                    <thead>
+            <div class="table-wrapper" style="overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);">
+                <table class="attendance-table" style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead style="position: sticky; top: 0; background: var(--gray-800); z-index: 10;">
                         <tr>
-                            <th>Subject</th>
-                            <th>Present</th>
-                            <th>Absent</th>
-                            <th>Total</th>
-                            <th>Percentage</th>
+                            <th style="padding: 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); font-weight: 600;">Subject</th>
+                            <th style="padding: 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); font-weight: 600;">Present</th>
+                            <th style="padding: 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); font-weight: 600;">Absent</th>
+                            <th style="padding: 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); font-weight: 600;">Total</th>
+                            <th style="padding: 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text-muted); font-weight: 600;">Percentage</th>
                         </tr>
                     </thead>
                     <tbody id="attendanceTable">
                         <!-- Skeleton rows -->
-                        <tr class="skeleton-row">
-                            <td><div class="skeleton skeleton-line medium"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
+                        <tr class="skeleton-row" style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line medium"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
                         </tr>
-                        <tr class="skeleton-row">
-                            <td><div class="skeleton skeleton-line medium"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                        </tr>
-                        <tr class="skeleton-row">
-                            <td><div class="skeleton skeleton-line full"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
-                            <td><div class="skeleton skeleton-line short"></div></td>
+                        <tr class="skeleton-row" style="border-bottom: 1px solid var(--color-border);">
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line medium"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
+                            <td style="padding: 16px;"><div class="skeleton skeleton-line short"></div></td>
                         </tr>
                     </tbody>
                 </table>

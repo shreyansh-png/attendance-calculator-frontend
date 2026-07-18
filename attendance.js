@@ -48,12 +48,12 @@ async function loadAttendance() {
             else if (pct < 75) badgeClass = "pct-warning";
 
             table.innerHTML += `
-                <tr>
-                    <td><strong>${subject.subjectName}</strong></td>
-                    <td style="color:var(--success);font-weight:600;">${present}</td>
-                    <td style="color:var(--danger);font-weight:600;">${absent}</td>
-                    <td>${total}</td>
-                    <td><span class="badge ${badgeClass === 'pct-good' ? 'badge-success' : badgeClass === 'pct-warning' ? 'badge-warning' : 'badge-danger'}">${pct}%</span></td>
+                <tr style="border-bottom: 1px solid var(--color-border); transition: background 0.2s;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.02)'" onmouseout="this.style.backgroundColor='transparent'">
+                    <td style="padding: 16px;"><strong>${subject.subjectName}</strong></td>
+                    <td style="padding: 16px; color:var(--success);font-weight:600;">${present}</td>
+                    <td style="padding: 16px; color:var(--danger);font-weight:600;">${absent}</td>
+                    <td style="padding: 16px;">${total}</td>
+                    <td style="padding: 16px;"><span class="badge ${badgeClass === 'pct-good' ? 'badge-success' : badgeClass === 'pct-warning' ? 'badge-warning' : 'badge-danger'}">${pct}%</span></td>
                 </tr>
             `;
         });

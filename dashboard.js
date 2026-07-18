@@ -76,15 +76,10 @@ function renderAttendanceButtons(classId, status) {
     if (isMarked) {
         return `
             <div class="attendance-actions" id="actions-${classId}" style="animation: fadeIn 0.3s ease;">
-                <div class="marked-state ${isPresent ? 'state-present' : 'state-absent'}">
-                    <span class="badge ${isPresent ? 'badge-success' : 'badge-danger'}" style="padding: 6px 12px; font-size: 13px;">
-                        <i data-lucide="${isPresent ? 'check-circle' : 'x-circle'}" style="width:16px;height:16px;"></i>
-                        ${isPresent ? 'Marked Present' : 'Marked Absent'}
-                    </span>
-                    <button class="btn-sm btn-outline" style="margin-left:8px;" onclick="resetAttendanceState('${classId}')">
-                        <i data-lucide="edit-2" style="width:12px;height:12px;"></i> Edit
-                    </button>
-                </div>
+                <button class="att-btn" style="width: 100%; cursor: default; background: ${isPresent ? 'var(--success-bg)' : 'var(--danger-bg)'}; color: ${isPresent ? 'var(--success)' : 'var(--danger)'}; border-color: ${isPresent ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)'};" disabled>
+                    <i data-lucide="${isPresent ? 'check-circle' : 'x-circle'}" style="width:16px;height:16px;"></i> 
+                    ${isPresent ? 'Marked Present' : 'Marked Absent'}
+                </button>
             </div>
         `;
     }
@@ -107,17 +102,6 @@ function renderAttendanceButtons(classId, status) {
             </button>
         </div>
     `;
-}
-
-// ─────────────────────────────────────────────
-// Reset State for Editing
-// ─────────────────────────────────────────────
-window.resetAttendanceState = function(classId) {
-    const actionsDiv = document.getElementById(`actions-${classId}`);
-    if(actionsDiv) {
-        actionsDiv.outerHTML = renderAttendanceButtons(classId, "Pending");
-        if (window.lucide) window.lucide.createIcons();
-    }
 }
 
 // ─────────────────────────────────────────────
