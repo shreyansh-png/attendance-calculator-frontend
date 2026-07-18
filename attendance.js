@@ -35,8 +35,14 @@ async function loadAttendance() {
         }
 
         subjects.forEach(subject => {
-
-            const pct = parseFloat(subject.percentage) || 0;
+            let present = parseInt(subject.present) || 0;
+            let absent = parseInt(subject.absent) || 0;
+            let total = parseInt(subject.total) || 0;
+            let pct = total === 0 ? 100 : (present / total) * 100;
+            
+            // Round precisely to 2 decimals
+            pct = Math.round(pct * 100) / 100;
+            
             let badgeClass = "pct-good";
             if      (pct < 60) badgeClass = "pct-danger";
             else if (pct < 75) badgeClass = "pct-warning";
@@ -44,24 +50,27 @@ async function loadAttendance() {
             table.innerHTML += `
                 <tr>
                     <td><strong>${subject.subjectName}</strong></td>
-                    <td style="color:var(--green-600);font-weight:600;">${subject.present}</td>
-                    <td style="color:var(--red-600);font-weight:600;">${subject.absent}</td>
-                    <td>${subject.total}</td>
-                    <td><span class="pct-badge ${badgeClass}">${subject.percentage}%</span></td>
+                    <td style="color:var(--success);font-weight:600;">${present}</td>
+                    <td style="color:var(--danger);font-weight:600;">${absent}</td>
+                    <td>${total}</td>
+                    <td><span class="badge ${badgeClass === 'pct-good' ? 'badge-success' : badgeClass === 'pct-warning' ? 'badge-warning' : 'badge-danger'}">${pct}%</span></td>
                 </tr>
             `;
         });
 
     } catch (error) {
 
-        showToast("error", error.message || "Could not load attendance report.");
+        if (typeof showToast === "function") {
+            showToast("error", error.message || "Could not load attendance report.");
+        }
 
         document.getElementById("attendanceTable").innerHTML = `
             <tr>
-                <td colspan="5" style="text-align:center;padding:24px;color:var(--red-600);">
+                <td colspan="5" style="text-align:center;padding:24px;color:var(--danger);">
                     ⚠️ ${error.message}
                 </td>
             </tr>`;
+
 
     }
 }

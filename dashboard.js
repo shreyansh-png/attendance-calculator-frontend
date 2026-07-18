@@ -66,41 +66,58 @@ async function loadAttendance() {
 
 /**
  * Build the attendance buttons HTML.
- * Present/Absent toggle design:
- * - Selected  → dark blue background, white text
- * - Unselected (when one is marked) → white, gray, disabled, opacity 60%
- * - Neither marked → both white with border
+ * Using modern interactive state logic.
  */
 function renderAttendanceButtons(classId, status) {
-
     const isPresent = status === "Present";
     const isAbsent  = status === "Absent";
     const isMarked  = isPresent || isAbsent;
 
     if (isMarked) {
-        return isPresent
-            ? `<div style="margin-top:12px;"><span class="badge badge-success"><i data-lucide="check" style="width:14px;height:14px;"></i> Present</span></div>`
-            : `<div style="margin-top:12px;"><span class="badge badge-danger"><i data-lucide="x" style="width:14px;height:14px;"></i> Absent</span></div>`;
+        return `
+            <div class="attendance-actions" id="actions-${classId}" style="animation: fadeIn 0.3s ease;">
+                <div class="marked-state ${isPresent ? 'state-present' : 'state-absent'}">
+                    <span class="badge ${isPresent ? 'badge-success' : 'badge-danger'}" style="padding: 6px 12px; font-size: 13px;">
+                        <i data-lucide="${isPresent ? 'check-circle' : 'x-circle'}" style="width:16px;height:16px;"></i>
+                        ${isPresent ? 'Marked Present' : 'Marked Absent'}
+                    </span>
+                    <button class="btn-sm btn-outline" style="margin-left:8px;" onclick="resetAttendanceState('${classId}')">
+                        <i data-lucide="edit-2" style="width:12px;height:12px;"></i> Edit
+                    </button>
+                </div>
+            </div>
+        `;
     }
 
     return `
-        <div class="attendance-actions">
+        <div class="attendance-actions" id="actions-${classId}">
             <button
                 id="present-btn-${classId}"
-                class="att-btn"
+                class="att-btn present-action"
                 onclick="markClassAttendance('${classId}', 'Present', this)"
             >
-                <i data-lucide="check-circle" style="width:16px;height:16px;"></i> Present
+                <i data-lucide="check" style="width:16px;height:16px;"></i> Present
             </button>
             <button
                 id="absent-btn-${classId}"
-                class="att-btn"
+                class="att-btn absent-action"
                 onclick="markClassAttendance('${classId}', 'Absent', this)"
             >
-                <i data-lucide="x-circle" style="width:16px;height:16px;"></i> Absent
+                <i data-lucide="x" style="width:16px;height:16px;"></i> Absent
             </button>
         </div>
     `;
+}
+
+// ─────────────────────────────────────────────
+// Reset State for Editing
+// ─────────────────────────────────────────────
+window.resetAttendanceState = function(classId) {
+    const actionsDiv = document.getElementById(`actions-${classId}`);
+    if(actionsDiv) {
+        actionsDiv.outerHTML = renderAttendanceButtons(classId, "Pending");
+        if (window.lucide) window.lucide.createIcons();
+    }
 }
 
 // ─────────────────────────────────────────────
@@ -187,39 +204,37 @@ async function loadTodayClasses() {
 // Mark Attendance
 // ─────────────────────────────────────────────
 async function markClassAttendance(classId, status, clickedBtn) {
-
     const actionsDiv = clickedBtn.parentElement;
     const allBtns    = actionsDiv.querySelectorAll("button");
+    const originalHtml = actionsDiv.innerHTML;
 
-    // Show loading on clicked button
+    // Loading State
     allBtns.forEach(btn => {
         btn.disabled = true;
-        btn.classList.add("deselected");
+        btn.style.opacity = '0.5';
     });
-    clickedBtn.innerHTML = '<span class="btn-spinner"></span>';
-    clickedBtn.classList.remove("deselected");
+    clickedBtn.innerHTML = '<span class="btn-spinner"></span> Saving...';
+    clickedBtn.style.opacity = '1';
+    clickedBtn.style.transform = 'scale(0.98)';
 
     try {
-
         await markAttendance(classId, status);
 
-        // Re-render the card's action area
+        // Success State
         actionsDiv.outerHTML = renderAttendanceButtons(classId, status);
         if (window.lucide) {
             window.lucide.createIcons();
         }
-        showToast("success", `Marked as ${status} — attendance saved! 📝`);
+        
+        // Ensure overall attendance is refreshed
+        loadAttendance();
 
+        showToast("success", `Marked as ${status} successfully! ✨`);
     } catch (error) {
-
-        // Restore buttons
-        allBtns.forEach(btn => {
-            btn.disabled = false;
-            btn.classList.remove("deselected");
-        });
-        clickedBtn.innerHTML = status === "Present" ? "✓ Present" : "✗ Absent";
-        showToast("error", error.message || "Could not mark attendance. Try again.");
-
+        // Restore State
+        actionsDiv.innerHTML = originalHtml;
+        if (window.lucide) window.lucide.createIcons();
+        showToast("error", error.message || "Failed to mark attendance.");
     }
 }
 
