@@ -215,10 +215,19 @@ async function markClassAttendance(classId, status, clickedBtn) {
 
         showToast("success", `Marked as ${status} successfully! ✨`);
     } catch (error) {
-        // Restore State
-        actionsDiv.innerHTML = originalHtml;
-        if (window.lucide) window.lucide.createIcons();
-        showToast("error", error.message || "Failed to mark attendance.");
+        const errorMsg = error.message || "Failed to mark attendance.";
+        
+        // If already marked, lock the button to the selected state instead of showing an error
+        if (errorMsg.toLowerCase().includes("already marked")) {
+            actionsDiv.outerHTML = renderAttendanceButtons(classId, status);
+            if (window.lucide) window.lucide.createIcons();
+            showToast("info", `Attendance was already recorded for this class.`);
+        } else {
+            // Restore State for genuine errors
+            actionsDiv.innerHTML = originalHtml;
+            if (window.lucide) window.lucide.createIcons();
+            showToast("error", errorMsg);
+        }
     }
 }
 

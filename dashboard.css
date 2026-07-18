@@ -273,6 +273,18 @@
     background: var(--gray-600);
 }
 
+.att-btn.present-action:hover:not(:disabled) {
+    background: var(--success-bg);
+    color: var(--success);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+.att-btn.absent-action:hover:not(:disabled) {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
 /* Selected state */
 .att-btn.selected-present {
     background: var(--success-bg) !important;
